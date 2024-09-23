@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    {#
+    Comentário em python (Flask) no html
+    #}
     <link rel="stylesheet" href="/static/css/template.css">
-    
-    <title>My little blog</title>
+    {#Carrega o CSS adicional, caso exista#}
+    {% if page.css %}
+    <link rel="stylesheet" href="/static/css/{{page.css}}">
+    {% endif %}
+    {#A linha abaixo atualiza o titúlo da página#}
+    <title>{{page.title}}</title>
 </head>
-<body>
-    
-    
 
+<body>
+
+    <header> Logo e Cabeçalho</header>
+
+    <nav>
+        <a href="/">Inicío</a>
+        <a href="/contacts">Contatos</a>
+        <a href="/about">About</a>
+    </nav>
+
+    <main>
+
+        <H1>{{page.content}}</H1>
+            <p>
+                <img src="{{page.img.url}}" alt="{{page.img.alt}}">
+            <p>Legenda da Imagem</p>
+            </p>
+
+        <article>
+            {% block article %}{% endblock %}
+        </article>
+
+        <aside>
+            {% block aside %}{% endblock %}
+        </aside>
+
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+
+
+
+
+    <!--Javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/static/js/template.js"></script>
+    {%if page.js%}
+    <script src="/static/js/{{page.js}}"></script>
+    {% endif %}
 </body>
+
 </html>

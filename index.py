@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 # Importação do Flask: Aqui estamos importando a classe Flask do pacote Flask, que é um microframework para construção de aplicações web em Python.
 
 app = Flask(__name__)
@@ -7,9 +7,36 @@ app = Flask(__name__)
 # @ -> anotation
 
 # Definição de rota: O decorador @app.route('/') define uma rota para a URL raiz (/). A função home() será chamada quando alguém acessar essa URL.
+
+#Rotaa para a ágina inicial
 @app.route('/')
 def home():
-    return "Hello World! (com Flask)"
+    # Passa parâmetros para o template
+    # "CSS" e "JS" são opcionais
+    page = {
+        'title': 'Página Inical',
+        "css":"home.css",
+        "js": "home.js",
+        "content": "Hello World! (com Flask)",
+        "img": {
+            "url": "https://picsum.photos/id/1/200/300",
+            "alt": "Imagem Aleatória",
+        }        
+    }    
+    return render_template("home.html", page=page)
+
+@app.route('/contacts')
+def contacts():
+    page = {
+        'title': 'Faça contatos',
+        "css":"home.css",
+        "img": {
+            "url": "https://picsum.photos/id/1/200/300",
+            "alt": "Imagem Aleatória",
+        } 
+                
+    }
+    return render_template("contacts.html",page=page)
 
 
 # Verificação de execução: Este bloco garante que o código dentro dele só será executado se o script for executado diretamente, e não se for importado como um módulo em outro script.
