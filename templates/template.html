@@ -12,13 +12,24 @@
     {% if page.css %}
     <link rel="stylesheet" href="/static/css/{{page.css}}">
     {% endif %}
+
+    {#Icone do Site#}
+    <link rel="shortcut icon" href="{{page.site.LOGO}}">
+
     {#A linha abaixo atualiza o titúlo da página#}
-    <title>{{page.title}}</title>
+    {%if page.title == "" %}
+    <title>{{page.site.NAME}}</title>
+    {% else %}
+    <title>{{page.site.NAME}} - {{page.title}}</title>
+    {% endif %}
 </head>
 
 <body>
 
-    <header> Logo e Cabeçalho</header>
+    <header>
+        <img src="{{page.site.LOGO}}" alt="logotipo do site {{page.site.NAME}}">
+        <h1>{{page.site.NAME}}</h1>
+    </header>
 
     <nav>
         <a href="/">Inicío</a>
@@ -26,13 +37,7 @@
         <a href="/about">About</a>
     </nav>
 
-    <main>
-
-        <H1>{{page.content}}</H1>
-            <p>
-                <img src="{{page.img.url}}" alt="{{page.img.alt}}">
-            <p>Legenda da Imagem</p>
-            </p>
+    <main>           
 
         <article>
             {% block article %}{% endblock %}
@@ -42,11 +47,10 @@
             {% block aside %}{% endblock %}
         </aside>
 
-
     </main>
 
     <footer>
-
+        © 2024 {{ page.site.OWNER }}
     </footer>
 
 

@@ -1,0 +1,3 @@
+Link para o downloads do mysql Workbench Community:
+https://dev.mysql.com/downloads/file/?id=528765
+

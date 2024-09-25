@@ -6,65 +6,69 @@
 -- PERIGO! Não faça isso em modo de produção
 DROP DATABASE IF EXISTS myblogdb;
 
--- Cria o banco de dados
--- !!!!!!!!!!!!!!!!!!!!!! ATENÇÃO !!!!!!!!!!!!!!!!!!!
--- Remova este comando após a publicação da versão de produção
-CREATE DATABASE myblogdb 
-    CHARACTER SET utf8mb4  -- Usando o conjunto de caracteres UTF-8
-    COLLATE utf8mb4_general_ci; -- Buscas em UTF-8 e case insensitive
+-- Cria o banco de dados novamente
+-- PERIGO! Não faça isso em modo de produção
+CREATE DATABASE jocablogdb
+    -- Usando o conjunto de caracteres UTF-8
+    CHARACTER SET utf8mb4
+    -- Buscas em UTF-8 e case insensitive
+    COLLATE utf8mb4_general_ci;
 
 -- Seleciona o banco de dados para os próximos comandos
 USE myblogdb;
 
--- Cria a tabela "staff" para armazenar informações dos usuários do blog
-CREATE TABLE staff(
-    sta_id INT PRIMARY KEY AUTO_INCREMENT, -- ID único do staff
-    sta_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data de criação do registro
-    sta_name VARCHAR(127) NOT NULL, -- Nome do staff
-    sta_email VARCHAR(255) NOT NULL, -- Email do staff
-    sta_password VARCHAR(63) NOT NULL, -- Senha do staff
-    sta_birth DATE NOT NULL, -- Data de nascimento
-    sta_description VARCHAR(255), -- Descrição do staff
-    sta_type ENUM('moderator', 'author', 'admin') DEFAULT 'moderator', -- Tipo de usuário
-    sta_status ENUM('on', 'off', 'del') DEFAULT 'on' -- Status do usuário
+-- Cria a tabela "staff" para armazenar informações sobre os usuários do sistema
+CREATE TABLE staff (
+    sta_id INT PRIMARY KEY AUTO_INCREMENT, -- ID único do staff (incrementa automaticamente)
+    sta_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e hora de criação do registro
+    sta_name VARCHAR(127) NOT NULL, -- Nome do staff (obrigatório)
+    sta_email VARCHAR(255) NOT NULL, -- Email do staff (obrigatório)
+    sta_password VARCHAR(63) NOT NULL, -- Senha do staff (obrigatório)
+    sta_birth DATE NOT NULL, -- Data de nascimento do staff (obrigatório)
+    sta_image VARCHAR(255), -- URL da imagem do staff (opcional)
+    sta_description VARCHAR(255), -- Descrição do staff (opcional)
+    sta_type ENUM('moderator', 'author', 'admin') DEFAULT 'moderator', -- Tipo de usuário (moderador, autor ou admin; padrão é moderador)
+    sta_status ENUM('on', 'off', 'del') DEFAULT 'on' -- Status do usuário (ativo, inativo ou deletado; padrão é ativo)
 );
 
--- Cria a tabela "article" para armazenar os artigos do blog
-CREATE TABLE article(
-    art_id INT PRIMARY KEY AUTO_INCREMENT, -- ID único do artigo
-    art_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data de criação do artigo
-    art_title VARCHAR(127) NOT NULL, -- Título do artigo
-    art_resume VARCHAR(255) NOT NULL, -- Resumo do artigo
-    art_thumbnail VARCHAR(255) NOT NULL, -- Thumbnail do artigo
-    art_content TEXT NOT NULL, -- Conteúdo do artigo
-    art_view INT DEFAULT 0, -- Contador de visualizações
-    art_author INT, -- ID do autor (referência para staff)
-    art_status ENUM('on', 'off', 'del') DEFAULT 'on', -- Status do artigo
-    FOREIGN KEY (art_author) REFERENCES staff (sta_id) -- Chave estrangeira para staff
+-- Cria a tabela "article" para armazenar os artigos publicados
+CREATE TABLE article (
+    art_id INT PRIMARY KEY AUTO_INCREMENT, -- ID único do artigo (incrementa automaticamente)
+    art_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e hora de criação do artigo
+    art_title VARCHAR(127) NOT NULL, -- Título do artigo (obrigatório)
+    art_resume VARCHAR(255) NOT NULL, -- Resumo do artigo (obrigatório)
+    art_thumbnail VARCHAR(255) NOT NULL, -- URL da imagem em miniatura do artigo (obrigatório)
+    art_content TEXT NOT NULL, -- Conteúdo completo do artigo (obrigatório)
+    art_view INT DEFAULT 0, -- Número de visualizações do artigo (inicialmente 0)
+    art_author INT, -- ID do autor do artigo (referencia staff)
+    art_status ENUM('on', 'off', 'del') DEFAULT 'on', -- Status do artigo (publicado, não publicado ou deletado; padrão é publicado)
+    -- Chave estrangeira para "staff"
+    FOREIGN KEY (art_author) REFERENCES staff (sta_id) -- Relaciona o autor do artigo com o staff
 );
 
 -- Cria a tabela "comment" para armazenar os comentários nos artigos
-CREATE TABLE comment(
-    com_id INT PRIMARY KEY AUTO_INCREMENT, -- ID único do comentário
-    com_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data de criação do comentário
-    com_article INT, -- ID do artigo (referência para article)
-    com_author_name VARCHAR(127) NOT NULL, -- Nome do autor do comentário
-    com_author_email VARCHAR(127) NOT NULL, -- Email do autor do comentário
-    com_comment TEXT NOT NULL, -- Conteúdo do comentário
-    com_status ENUM('on', 'off', 'del') DEFAULT 'on', -- Status do comentário
-    FOREIGN KEY(com_article) REFERENCES article(art_id) -- Chave estrangeira para article
+CREATE TABLE comment (
+    com_id INT PRIMARY KEY AUTO_INCREMENT, -- ID único do comentário (incrementa automaticamente)
+    com_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e hora de criação do comentário
+    com_article INT, -- ID do artigo ao qual o comentário se refere
+    com_author_name VARCHAR(127) NOT NULL, -- Nome do autor do comentário (obrigatório)
+    com_author_email VARCHAR(255) NOT NULL, -- Email do autor do comentário (obrigatório)
+    com_comment TEXT NOT NULL, -- Texto do comentário (obrigatório)
+    com_status ENUM('on', 'off', 'del') DEFAULT 'on', -- Status do comentário (ativo, inativo ou deletado; padrão é ativo)
+    FOREIGN KEY (com_article) REFERENCES article (art_id) -- Relaciona o comentário com o artigo correspondente
 );
 
--- Cria a tabela "contact" para armazenar mensagens de contato
-CREATE TABLE contact(
-    id INT PRIMARY KEY AUTO_INCREMENT, -- ID único da mensagem
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data de criação da mensagem
-    name VARCHAR(127) NOT NULL, -- Nome do remetente
-    email VARCHAR(127) NOT NULL, -- Email do remetente
-    subject VARCHAR(255) NOT NULL, -- Assunto da mensagem
-    message TEXT NOT NULL, -- Conteúdo da mensagem
-    status ENUM('received', 'readed', 'responded', 'deleted') -- Status da mensagem
+-- Cria a tabela "contact" para armazenar mensagens de contato dos usuários
+CREATE TABLE contact (
+    id INT PRIMARY KEY AUTO_INCREMENT, -- ID único da mensagem de contato (incrementa automaticamente)
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e hora da mensagem
+    name VARCHAR(127) NOT NULL, -- Nome do remetente (obrigatório)
+    email VARCHAR(127) NOT NULL, -- Email do remetente (obrigatório)
+    subject VARCHAR(127) NOT NULL, -- Assunto da mensagem (obrigatório)
+    message TEXT NOT NULL, -- Texto da mensagem (obrigatório)
+    status ENUM('received', 'readed', 'responded', 'deleted') DEFAULT 'received' -- Status da mensagem (recebida, lida, respondida ou deletada; padrão é recebida)
 );
+
 
 -- ------------------------------------------- --
 -- Popula(colocar) as tabelas com alguns dados --
@@ -77,6 +81,7 @@ INSERT INTO staff(
     sta_email,        -- Email do usuário
     sta_password,     -- Senha (armazenada como hash)
     sta_birth,        -- Data de nascimento
+    sta_image,
     sta_description,  -- Descrição do usuário
     sta_type          -- Tipo de usuário (admin, author, moderator)
 ) VALUES (
@@ -84,6 +89,7 @@ INSERT INTO staff(
     'cincin@email.com',            -- Email do primeiro usuário
     SHA1('a1b2c3'),                -- Senha do primeiro usuário (hash)
     '2002-06-15',                  -- Data de nascimento do primeiro usuário
+    'https://randomuser.me/api/portraits/men/1.jpg',
     'De tudo mais um pouco',       -- Descrição do primeiro usuário
     'admin'                        -- Tipo do primeiro usuário
 ), (
@@ -91,6 +97,7 @@ INSERT INTO staff(
     'anari@email.com',             -- Email do segundo usuário
     SHA1('qwert9513'),             -- Senha do segundo usuário (hash)
     '1990-01-25',                  -- Data de nascimento do segundo usuário
+    'https://randomuser.me/api/portraits/women/1.jpg',
     'Professora, leitora, curiosa e exploradora', -- Descrição do segundo usuário
     'author'                       -- Tipo do segundo usuário
 ), (
@@ -98,6 +105,7 @@ INSERT INTO staff(
     'lucas.almeida@email.com',     -- Email do terceiro usuário
     SHA1('password123'),           -- Senha do terceiro usuário (hash)
     '1985-03-10',                  -- Data de nascimento do terceiro usuário
+    'https://randomuser.me/api/portraits/men/3.jpg',
     'Aventureiro e amante da natureza', -- Descrição do terceiro usuário
     'moderator'                    -- Tipo do terceiro usuário
 ), (
@@ -105,6 +113,7 @@ INSERT INTO staff(
     'mariana.ferreira@email.com',   -- Email da quarta usuário
     SHA1('mariana456'),            -- Senha da quarta usuário (hash)
     '1995-07-20',                  -- Data de nascimento da quarta usuário
+    'https://randomuser.me/api/portraits/women/2.jpg',
     'Escritora e viajante',        -- Descrição da quarta usuário
     'author'                       -- Tipo da quarta usuário
 ), (
@@ -112,6 +121,7 @@ INSERT INTO staff(
     'roberto.silva@email.com',     -- Email do quinto usuário
     SHA1('roberto789'),            -- Senha do quinto usuário (hash)
     '1978-11-05',                  -- Data de nascimento do quinto usuário
+    'https://randomuser.me/api/portraits/men/5.jpg',
     'Entusiasta da tecnologia e inovação', -- Descrição do quinto usuário
     'admin'                        -- Tipo do quinto usuário
 ), (
@@ -119,6 +129,7 @@ INSERT INTO staff(
     'juliana.costa@email.com',     -- Email da sexta usuário
     SHA1('juliana321'),            -- Senha da sexta usuário (hash)
     '1992-02-15',                  -- Data de nascimento da sexta usuário
+    'https://randomuser.me/api/portraits/women/6.jpg',
     'Designer e criadora de conteúdo', -- Descrição da sexta usuário
     'author'                       -- Tipo da sexta usuário
 );
@@ -259,6 +270,7 @@ INSERT INTO comment(
     'eduardolima@email.com',  -- Email do autor do comentário
     'O autocuidado é fundamental! Muito importante falar sobre isso.'  -- Conteúdo do comentário
 );
+
 
 /*** Otimizado e comentado pelo chat GPT 
 
