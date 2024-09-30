@@ -1,28 +1,50 @@
-{% extends "template.html" %}
-
-{% block article %}
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error in, ratione dolor voluptatibus reiciendis corporis
-        excepturi minima vitae reprehenderit quaerat provident veritatis cupiditate necessitatibus perspiciatis totam magni
-        sequi harum dolore?</p>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo quisquam, quidem necessitatibus mollitia tempore
-        porro, eveniet nihil delectus quos temporibus, amet id dolorem quasi fugiat! Perspiciatis numquam ex dicta maxime.
-    </p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet aspernatur fugiat velit perferendis rem nisi, nam
-        eligendi blanditiis sapiente iusto, debitis accusamus aliquam aut id placeat dolor animi perspiciatis atque?</p>
-{% endblock %}
+{# Este comando indica que o arquivo atual estende um template base chamado "template.html" #}
+{% extends "template.html" %} 
 
 
-{% block aside %}
-    <h3>Meu Aside</h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-{% endblock %}
+{# Início do bloco "article", que será preenchido na página final #}
+{% block article %} 
 
-<!--
-<h3>Lista de Usuários</h3>
-{# Mostra um alista de pessoas #}
-<ul>
-    {% for user in listaUsers %}
-    <li>{{user}}</li>
-    {% endfor %}
-</ul>
--->
+{# Título da seção de artigos #}
+<h2>Artigos </h2> 
+
+{# Início de um contêiner para organizar os artigos em uma grade #}
+<div class="article-grid"> 
+
+    {# Laço que itera sobre a lista de artigos disponível na variável "page.articles" #}
+    {% for articles in page.articles %} 
+
+    {# Cada artigo é apresentado
+        em uma "caixa". Ao clicar, redireciona para a página do artigo, usando o ID do artigo #}
+    <div class="article-box" onclick="location.href = '/view/' + {{ articles['art_id'] }}">
+        
+        {# Imagem em miniatura do artigo,
+            com o título como texto alternativo #}
+        <img src="{{ articles['art_thumbnail'] }}" alt="{{ articles['art_title'] }}"> 
+        <div> {# Início de um contêiner para o título e resumo do artigo #}
+
+            {# Título do artigo #}
+            <h4>{{ articles['art_title'] }}</h4> 
+
+            {# Resumo do artigo em uma tag pequena #}
+            <small>{{ articles['art_resume'] }}</small> 
+        </div>
+    </div>
+
+    {# Fim do laço #}
+    {% endfor %} 
+
+</div> {# Fim do contêiner de artigos #}
+
+{# Fim do bloco "article" #}
+{% endblock %} 
+
+{# Início do bloco "aside", para conteúdo adicional #}
+{% block aside %} 
+
+{# Título para a seção "aside" #}
+<h3>Meu Aside</h3> 
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> {# Texto de exemplo em latim #}
+
+{# Fim do bloco "aside" #}
+{% endblock %} 

@@ -8,6 +8,7 @@
     Comentário em python (Flask) no html
     #}
     <link rel="stylesheet" href="/static/css/template.css">
+    
     {#Carrega o CSS adicional, caso exista#}
     {% if page.css %}
     <link rel="stylesheet" href="/static/css/{{page.css}}">
@@ -20,42 +21,42 @@
     {%if page.title == "" %}
     <title>{{page.site.NAME}}</title>
     {% else %}
-    <title>{{page.site.NAME}} - {{page.title}}</title>
+    <title>{{page.site.NAME}} - {{page.title|safe}}</title>
     {% endif %}
 </head>
 
 <body>
 
-    <header>
-        <img src="{{page.site.LOGO}}" alt="logotipo do site {{page.site.NAME}}">
-        <h1>{{page.site.NAME}}</h1>
-    </header>
+    <div id="wrap">
 
-    <nav>
-        <a href="/">Inicío</a>
-        <a href="/contacts">Contatos</a>
-        <a href="/about">About</a>
-    </nav>
+        <header>
+            <img src="{{page.site.LOGO}}" alt="logotipo do site {{page.site.NAME}}">
+            <h1>{{page.site.NAME}}</h1>
+        </header>
+    
+        <nav>
+            <a href="/">Inicío</a>
+            <a href="/contacts">Contatos</a>
+            <a href="/about">About</a>
+        </nav>
+    
+        <main>           
+    
+            <article>
+                {% block article %}{% endblock %}
+            </article>
+    
+            <aside>
+                {% block aside %}{% endblock %}
+            </aside>
+    
+        </main>
+    
+        <footer>
+            © 2024 {{ page.site.OWNER }}
+        </footer>
 
-    <main>           
-
-        <article>
-            {% block article %}{% endblock %}
-        </article>
-
-        <aside>
-            {% block aside %}{% endblock %}
-        </aside>
-
-    </main>
-
-    <footer>
-        © 2024 {{ page.site.OWNER }}
-    </footer>
-
-
-
-
+    </div>
 
     <!--Javascript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

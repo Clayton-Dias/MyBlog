@@ -5,14 +5,42 @@
 <h2>Faça Contato</h2>
 <p>Preencha os campos abaixo para entrar em contato conosco</p>
 
-<p>Formulário</p>
+
+<form action="#" method="post"></form>
+
+    <p>
+        <label for="fieldName">Seu nome:</label>
+        <input type="text" name="name" id="fieldName" required minlength="3">
+    </p>
+
+    <p>
+        <label for="fieldEmail">Seu email:</label>
+        <input type="email" name="email" id="fieldEmail" required>
+    </p>
+
+    <p>
+        <label for="fieldSubject">Assunto:</label>
+        <input type="text" name="subject" id="fieldSubject" required minlength="5">
+    </p>
+
+    <p>
+        <label for="fieldMessage">Mensagem:</label>
+        <textarea name="message" id="fieldMessage" required minlength="5"></textarea>
+    </p>
+    <p>
+        <button type="submit"><i class="fa-solid fa-share fa-fw"></i> Enviar</button>
+        <small>&larr; Clique somente uma vez</small>
+    </p>
+
+
+</form>
 
 {% endblock %}
 
 
 {% block aside %}
 <ul>
-    <li>facebook</li>
-    <li>instagram</li>
+    <li>Facebook</li>
+    <li>Instagram</li>
 </ul>
 {% endblock %}

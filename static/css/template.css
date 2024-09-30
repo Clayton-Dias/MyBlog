@@ -1,5 +1,115 @@
 /**CSS do tema do site**/
 
-/*Carrega a biblioteca de icones do Font Awesome*/
+/* Carrega a biblioteca de ícones do Font Awesome */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
 
+/* Estiliza todos os elementos, definindo a caixa de modelagem e transições */
+* {
+    box-sizing: border-box; /* Faz com que o padding e a borda sejam incluídos nas dimensões totais do elemento */
+    outline: none; /* Remove o contorno padrão que aparece ao focar em um elemento */
+    transition: .2s; /* Adiciona uma transição suave de 0.2 segundos para alterações de estilo */
+}
+
+/* Estiliza o html e o body, definindo a fonte e o tamanho da página */
+html,
+body {
+    font-family: sans-serif; /* Define uma fonte sans-serif para o texto */
+    font-size: 16px; /* Tamanho padrão da fonte */
+    position: relative; /* Permite que elementos filhos sejam posicionados em relação ao body */
+    width: 100%; /* Largura total da página */
+    height: 100%; /* Altura total da página */
+    padding: 0; /* Remove qualquer preenchimento padrão */
+    margin: 0; /* Remove qualquer margem padrão */
+}
+
+/* Define a cor de fundo do body */
+body {
+    background-color: slategray; /* Define um fundo cinza-azulado */
+}
+
+/* Wrapper principal para o layout do site */
+#wrap {
+    position: relative; /* Permite que os filhos sejam posicionados em relação a ele */
+    width: 100%; /* Largura total do wrap */
+    height: 100%; /* Altura total do wrap */
+    max-width: 1024px; /* Largura máxima do wrap */
+    min-width: 280px; /* Largura mínima do wrap */
+    margin: auto; /* Centraliza o wrap horizontalmente */
+    display: flex; /* Usa Flexbox para layout */
+    flex-direction: column; /* Organiza os elementos em uma coluna */
+}
+
+/* Estiliza o cabeçalho */
+#wrap > header {
+    background-color: grey; /* Cor de fundo do cabeçalho */
+    display: flex; /* Usa Flexbox para organizar itens no cabeçalho */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    border-bottom: 1px dotted white; /* Borda inferior pontilhada branca */
+}
+
+/* Imagem do cabeçalho */
+#wrap > header img {
+    height: 4rem; /* Altura da imagem */
+    width: auto; /* Mantém a proporção da imagem */
+    display: block; /* Faz a imagem ocupar seu espaço sem o comportamento inline */
+    margin-right: 1rem; /* Espaço à direita da imagem */
+}
+
+/* Título do cabeçalho */
+#wrap > header h1 {
+    margin: 0; /* Remove a margem padrão do título */
+    color: white; /* Define a cor do texto como branco */
+}
+
+/* Estiliza a barra de navegação */
+#wrap > nav {
+    background-color: steelblue; /* Cor de fundo da navegação */
+    display: flex; /* Usa Flexbox para organizar os links */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    border-bottom: 1px dotted white; /* Borda inferior pontilhada branca */
+}
+
+/* Links da navegação */
+#wrap > nav a {
+    color: white; /* Cor do texto dos links */
+    padding: 1rem; /* Espaço interno ao redor do texto */
+    text-transform: uppercase; /* Converte o texto para letras maiúsculas */
+    text-decoration: none; /* Remove o sublinhado dos links */
+}
+
+/* Efeito ao passar o mouse sobre os links */
+#wrap > nav a:hover {
+    color: steelblue; /* Cor do texto ao passar o mouse */
+    background-color: white; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estiliza a seção principal do site */
+#wrap > main {
+    display: flex; /* Usa Flexbox para organizar os itens no main */
+    flex-direction: column; /* Organiza os elementos em uma coluna */
+    flex-grow: 1; /* Permite que o main cresça para ocupar o espaço disponível */
+}
+
+/* Artigos dentro do main */
+#wrap > main > article {
+    background-color: white; /* Cor de fundo do artigo */
+    padding: 0 1rem; /* Espaço interno lateral no artigo */
+    flex-grow: 1; /* Permite que o artigo cresça para ocupar o espaço disponível */
+}
+
+/* Barra lateral (aside) */
+#wrap > main > aside {
+    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco semitransparente */
+    padding: 0 1rem; /* Espaço interno lateral no aside */
+}
+
+/* Estiliza o rodapé */
+#wrap > footer {
+    display: flex; /* Usa Flexbox para organizar os itens no rodapé */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    background-color: black; /* Cor de fundo do rodapé */
+    color: white; /* Cor do texto no rodapé */
+    padding: 1rem; /* Espaço interno ao redor do conteúdo do rodapé */
+}

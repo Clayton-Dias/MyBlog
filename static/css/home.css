@@ -1,1 +1,66 @@
 /**CSS do home.html**/
+
+.article-grid {
+    display: flex; /* Define um contêiner flexível para os artigos. */
+    flex-wrap: wrap; /* Permite que os itens se movam para a linha seguinte quando o espaço é insuficiente. */
+    justify-content: center; /* Centraliza os itens horizontalmente dentro do contêiner. */
+    margin-bottom: 1rem; /* Adiciona uma margem inferior ao contêiner. */
+}
+
+.article-box {
+    display: flex; /* Define um contêiner flexível para cada artigo. */
+    flex-direction: column; /* Organiza os conteúdos dos artigos em coluna. */
+    border: 1px dotted grey; /* Aplica uma borda pontilhada cinza ao redor dos artigos. */
+    margin-bottom: 1rem; /* Adiciona margem inferior entre os artigos. */
+    cursor: pointer; /* Muda o cursor para indicar que o artigo é clicável. */
+    flex: 1 1 100%; /* Permite que o artigo ocupe toda a largura disponível. */
+    margin: 0.5rem; /* Adiciona margem de 0.5rem ao redor de cada artigo. */
+}
+
+.article-box:hover {
+    background-color: #ddd; /* Muda a cor de fundo ao passar o mouse sobre o artigo. */
+}
+
+.article-box img {
+    width: 100%; /* Faz com que as imagens ocupem toda a largura do contêiner do artigo. */
+    height: auto; /* Mantém a proporção original da imagem. */
+}
+
+.article-box div {
+    padding: .5rem; /* Adiciona espaço interno ao contêiner de texto do artigo. */
+    font-size: small; /* Define o tamanho da fonte como pequeno. */
+}
+
+.article-box div h4 {
+    margin: 0 0 .25rem 0; /* Remove margens superiores e laterais, e adiciona uma margem inferior de 0.25rem ao título. */
+    font-size: 1rem; /* Define o tamanho da fonte do título como 1rem. */
+}
+
+/* Media queries para responsividade: */
+@media (min-width: 425px) and (max-width: 574px) {
+    .article-box {
+        flex: 1 1 calc(50% - 1rem); /* Ocupa 50% da largura do contêiner com margem. */
+        max-width: calc(50% - 1rem); /* Define a largura máxima como 50% do contêiner. */
+    }
+}
+
+@media (min-width: 575px) and (max-width: 767px) {
+    .article-box {
+        flex: 1 1 calc(33.33% - 1rem); /* Ocupa 33.33% da largura do contêiner com margem. */
+        max-width: calc(33.33% - 1rem); /* Define a largura máxima como 33.33% do contêiner. */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 919px) {
+    .article-box {
+        flex: 1 1 calc(50% - 1rem); /* Volta a ocupar 50% da largura do contêiner com margem. */
+        max-width: calc(50% - 1rem); /* Define a largura máxima como 50% do contêiner. */
+    }
+}
+
+@media (min-width: 920px) {
+    .article-box {
+        flex: 1 1 calc(33.33% - 1rem); /* Ocupa 33.33% da largura do contêiner com margem. */
+        max-width: calc(33.33% - 1rem); /* Define a largura máxima como 33.33% do contêiner. */
+    }
+}
