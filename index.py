@@ -1,6 +1,12 @@
 # Importação do Flask: Aqui estamos importando a classe Flask do pacote Flask, que é um microframework para construção de aplicações web em Python.
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, request, url_for
 from flask_mysqldb import MySQL, MySQLdb
+
+# Importar as funções do banco de dados, tabela article
+from functions.db_articles import *
+
+# Importar as funções do banco de dados, tabela comment
+from functions.db_comments import *
 
 # Constantes do site
 SITE = {
@@ -38,33 +44,14 @@ mysql = MySQL(app)
 @app.route('/')
 def home():
 
-    # Consulta SQL
-    sql = '''
-        -- Seleciona os campos art_id, art_title, art_resume e art_thumbnail da tabela article
-        SELECT art_id, art_title, art_resume, art_thumbnail
-
-        -- Define a tabela de onde os dados serão extraídos
-        FROM article
-
-        -- Filtra os resultados para incluir apenas artigos que estão "on" (ativos) e cuja data é anterior ou igual à data atual
-        WHERE art_status = 'on'  -- Verifica se o status do artigo é 'on'
-        AND art_date <= NOW()    -- Compara a data do artigo com a data e hora atuais
-
-        -- Ordena os resultados pela data do artigo em ordem decrescente (do mais recente para o mais antigo)
-        ORDER BY art_date DESC;
-    '''
-
-    # Executa a query e obtém os dados na forma de DICT
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute(sql)
-    articles = cur.fetchall()
-    cur.close()
+    # Obtém todos os artigos
+    articles = get_all(mysql)
 
     # Somente para debug
     # Funciona somente quando a route para a raiz for acionada
     # print('\n\n\n', articles, '\n\n\n')
 
-    # Passa parâmetros para o template
+    # Parâmetros a serem passados para o template
     # "CSS" e "JS" são opcionais
     toPage = {
         "site": SITE,
@@ -79,57 +66,88 @@ def home():
     # para o template como `page`.
     return render_template("home.html", page=toPage)
 
-
+# Rota para visualizar um artigo específico
 @app.route('/view/<artid>')
 def view(artid):
 
+    # Se o ID(artid) do artigo não é um número, direcionar para 404
     if not artid.isdigit():
         return page_not_found(404)
+    
+    # Obtém o artigo pelo ID
+    article = get_one(mysql, artid) 
 
-    sql = '''
-        SELECT art_id, art_date, art_title, art_content,
-
-        -- Obtém a data em PT_BR pelo pseudo-campo 'art_datebr'
-        DATE_FORMAT(art_date, '%%d/%%m/%%Y às %%H:%%i') AS art_datebr,
-        sta_id, sta_name, sta_image, sta_description,
-
-        -- Calcula a idade para 'sta_age' considerando ano, mês e dia de nascimento
-        TIMESTAMPDIFF(YEAR, sta_birth, CURDATE()) - 
-        (DATE_FORMAT(CURDATE(), '%%m%%d') < DATE_FORMAT(sta_birth, '%%m%%d')) AS sta_age
-        
-        FROM article 
-
-        -- Realiza um INNER JOIN entre a tabela article e a tabela staff
-        INNER JOIN staff ON art_author = sta_id
-        WHERE art_id = %s  -- Filtra para obter apenas o artigo com ID específico
-            AND art_status = 'on'  -- Considera apenas artigos que estão ativos
-            AND art_date <= NOW();  -- Inclui apenas artigos cuja data é menor ou igual à data atual
-
-    '''
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute(sql, (artid,))
-    article = cur.fetchone()
 
     # Para debug
     # print('\n\n\n', article, '\n\n\n')
 
+    # Se o artigo não existe ou está disponível, direcionar para 404
     if article is None:
         return page_not_found(404)
     
-    sql = 'UPDATE article SET art_view = art_view +1  WHERE art_id = %s'
-    cur.execute(sql, (artid,))
-    mysql.connection.commit()
+    # Atualiza as visualizações do artigo
+    update_views(mysql, artid)
 
+
+    # Traduz o "type" do author
+    '''
+    if article['sta_type'] == 'admin':
+        article['sta_pt_type'] = 'Administrador(a)'
+    elif article['sta_type'] == 'author':
+        article['sta_pt_type'] = "Autor(a)"
+    else:
+        article['sta_pt-type'] = "Moderador(a)" 
+    '''    
+    # Tradução do tipo de autor
+    type_translation = {
+        'admin': 'Administrador(a)',
+        'author': 'Autor(a)',
+        'moderator': 'Moderador(a)'
+    }
+    article['sta_pt_type'] = type_translation.get(article['sta_type'], 'Desconhecido')
+    
+    # Obtém mais artigos do autor
+    articles = get_plus(mysql, article['sta_id'], article['art_id'], 4)
+
+    
+    # Obtém somente o primeiro nome do autor
+    article['sta_first'] = article['sta_name'].split()[0]
+
+
+    # Obtém todos os comentários do artigo atual
+    comments = get_comments(mysql, article['art_id'])
+
+    # Para debug
+    #print('\n\n\n', comments, '\n\n\n')
+
+
+    # Total de comentários
+    total_comments = len(comments)
 
     toPage={
         'site' : SITE,
         'title': article["art_title"],
         'css':'view.css',
-        'article': article
+        'article': article,
+        'articles': articles,
+        'total_comments': total_comments,
+        'comments': comments
     }
 
-    cur.close()
     return render_template("view.html", page=toPage)
+
+
+
+@app.route('/comment', methods=['POST'])
+def comment():
+
+    # Obtém dados do formulario
+    form = request.form
+    
+    # Salva o comentário no banco de dados
+    save_comment(mysql, form)
+    
+    return redirect(f"{url_for('view', artid=form['artid'])}#comments")
 
 
 # Rota para a página dec contatos → /contacts
@@ -153,7 +171,7 @@ def about():
     }
     return render_template("about.html", page=page)
 
-
+# Manipulador de erro 404
 @app.errorhandler(404)
 def page_not_found(e):
     toPage = {
@@ -162,6 +180,18 @@ def page_not_found(e):
         'css': '404.css'
     }
     return render_template('404.html', page=toPage), 404
+
+
+# Manipulador de erro 405
+@app.errorhandler(405)
+def page_not_found(e):
+    toPage = {
+        'title': 'Erro 405',
+        'site': SITE,
+        'css': '405.css'
+    }
+    #return render_template('405.html', page=toPage), 405
+    return 'Errou'
 
 
 # Verificação de execução: Este bloco garante que o código dentro dele só será executado se o script for executado diretamente, e não se for importado como um módulo em outro script.

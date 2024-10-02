@@ -1,115 +1,292 @@
-/**CSS do tema do site**/
+/* CSS do tema do site */
 
-/* Carrega a biblioteca de ícones do Font Awesome */
+/* Importações */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
 
-/* Estiliza todos os elementos, definindo a caixa de modelagem e transições */
 * {
-    box-sizing: border-box; /* Faz com que o padding e a borda sejam incluídos nas dimensões totais do elemento */
-    outline: none; /* Remove o contorno padrão que aparece ao focar em um elemento */
-    transition: .2s; /* Adiciona uma transição suave de 0.2 segundos para alterações de estilo */
+    box-sizing: border-box;
+    outline: none;
+    transition: .2s;
 }
 
-/* Estiliza o html e o body, definindo a fonte e o tamanho da página */
 html,
 body {
-    font-family: sans-serif; /* Define uma fonte sans-serif para o texto */
-    font-size: 16px; /* Tamanho padrão da fonte */
-    position: relative; /* Permite que elementos filhos sejam posicionados em relação ao body */
-    width: 100%; /* Largura total da página */
-    height: 100%; /* Altura total da página */
-    padding: 0; /* Remove qualquer preenchimento padrão */
-    margin: 0; /* Remove qualquer margem padrão */
+    font-family: sans-serif;
+    font-size: 16px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-/* Define a cor de fundo do body */
 body {
-    background-color: slategray; /* Define um fundo cinza-azulado */
+    background-color: slategray;
+    background-image: url('/static/img/bg01.png');
+    background-position: top left;
+    background-attachment: fixed;
 }
 
-/* Wrapper principal para o layout do site */
+a {
+    color: steelblue;
+    text-decoration: none;
+}
+
+a:hover {
+    color: orangered;
+}
+
 #wrap {
-    position: relative; /* Permite que os filhos sejam posicionados em relação a ele */
-    width: 100%; /* Largura total do wrap */
-    height: 100%; /* Altura total do wrap */
-    max-width: 1024px; /* Largura máxima do wrap */
-    min-width: 280px; /* Largura mínima do wrap */
-    margin: auto; /* Centraliza o wrap horizontalmente */
-    display: flex; /* Usa Flexbox para layout */
-    flex-direction: column; /* Organiza os elementos em uma coluna */
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1024px;
+    min-width: 280px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Estiliza o cabeçalho */
-#wrap > header {
-    background-color: grey; /* Cor de fundo do cabeçalho */
-    display: flex; /* Usa Flexbox para organizar itens no cabeçalho */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
-    border-bottom: 1px dotted white; /* Borda inferior pontilhada branca */
+#wrap>header {
+    background-color: rgb(89, 162, 221);
+    display: flex;
+    flex-direction: column;
 }
 
-/* Imagem do cabeçalho */
-#wrap > header img {
-    height: 4rem; /* Altura da imagem */
-    width: auto; /* Mantém a proporção da imagem */
-    display: block; /* Faz a imagem ocupar seu espaço sem o comportamento inline */
-    margin-right: 1rem; /* Espaço à direita da imagem */
+#wrap>header>div {
+    display: flex;
+    align-items: center;
 }
 
-/* Título do cabeçalho */
-#wrap > header h1 {
-    margin: 0; /* Remove a margem padrão do título */
-    color: white; /* Define a cor do texto como branco */
+#wrap>header>div img {
+    height: 4rem;
+    width: auto;
+    display: block;
+    margin: 0 .5rem;
 }
 
-/* Estiliza a barra de navegação */
-#wrap > nav {
-    background-color: steelblue; /* Cor de fundo da navegação */
-    display: flex; /* Usa Flexbox para organizar os links */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
-    justify-content: center; /* Centraliza os itens horizontalmente */
-    border-bottom: 1px dotted white; /* Borda inferior pontilhada branca */
+#wrap>header>div h1 {
+    margin: 0;
+    color: rgb(218, 228, 134);
+    -webkit-text-stroke: .5px black;
+    font-size: 2.5rem;
 }
 
-/* Links da navegação */
-#wrap > nav a {
-    color: white; /* Cor do texto dos links */
-    padding: 1rem; /* Espaço interno ao redor do texto */
-    text-transform: uppercase; /* Converte o texto para letras maiúsculas */
-    text-decoration: none; /* Remove o sublinhado dos links */
+#wrap>header>form {
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-top: 1px dotted white;
 }
 
-/* Efeito ao passar o mouse sobre os links */
-#wrap > nav a:hover {
-    color: steelblue; /* Cor do texto ao passar o mouse */
-    background-color: white; /* Cor de fundo ao passar o mouse */
+#wrap>header>form input,
+#wrap>header>form button {
+    font-family: inherit;
+    font-size: inherit;
+    padding: .25rem .5rem;
+    border: none;
 }
 
-/* Estiliza a seção principal do site */
-#wrap > main {
-    display: flex; /* Usa Flexbox para organizar os itens no main */
-    flex-direction: column; /* Organiza os elementos em uma coluna */
-    flex-grow: 1; /* Permite que o main cresça para ocupar o espaço disponível */
+#wrap>header>form input {
+    flex-grow: 1;
 }
 
-/* Artigos dentro do main */
-#wrap > main > article {
-    background-color: white; /* Cor de fundo do artigo */
-    padding: 0 1rem; /* Espaço interno lateral no artigo */
-    flex-grow: 1; /* Permite que o artigo cresça para ocupar o espaço disponível */
+#wrap>header>form button {
+    cursor: pointer;
+    background-color: #ddd;
 }
 
-/* Barra lateral (aside) */
-#wrap > main > aside {
-    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco semitransparente */
-    padding: 0 1rem; /* Espaço interno lateral no aside */
+#wrap>header>form button:hover {
+    cursor: pointer;
+    background-color: #bbb;
 }
 
-/* Estiliza o rodapé */
-#wrap > footer {
-    display: flex; /* Usa Flexbox para organizar os itens no rodapé */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
-    justify-content: center; /* Centraliza os itens horizontalmente */
-    background-color: black; /* Cor de fundo do rodapé */
-    color: white; /* Cor do texto no rodapé */
-    padding: 1rem; /* Espaço interno ao redor do conteúdo do rodapé */
+
+/*Menu principal*/
+
+#wrap>nav {
+    background-color: rgb(50, 59, 68);
+    border-top: 1px dotted white;
+    border-bottom: 1px dotted white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#wrap>nav a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 1rem;
+    text-transform: uppercase;
+}
+
+#wrap>nav a:hover {
+    color: rgb(50, 59, 68);
+    background-color: #ddd;
+}
+
+
+/** Conteudo **/
+#wrap>main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/** Conteudo Principal**/
+#wrap>main>article {
+    background-color: white;
+    padding: 0 1rem;
+    flex-grow: 1;
+}
+
+
+/** Conteudo Auxiliar**/
+#wrap>main>aside {
+    background-color: #ccc;
+    padding: 0 1rem;
+    border-top: 1px dotted black;
+}
+
+
+/*Rodape*/
+#wrap>footer {
+    background-color: rgb(50, 59, 68);
+    color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#wrap>footer>a {
+    font-size: 1.5rem;
+    padding: .5rem;
+    color: #ddd;
+}
+
+#wrap>footer a:hover {
+    color: steelblue;
+}
+
+#wrap>footer>div {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+#wrap>footer>div a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+#wrap>footer>div small {
+    display: block;
+    font-size: 65%;
+    margin-top: .25rem;
+}
+
+@media screen and (min-width: 575px) {
+
+    #wrap>header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #wrap>header>div h1 {
+        font-size: 2rem;
+    }
+
+    #wrap>header>form {
+        border-top: none;
+        border-left: 1px dotted white;
+    }
+
+    #wrap>header>form input,
+    #wrap>header>form button {
+        padding: .35rem .5rem;
+    }
+
+    #wrap>nav {
+        justify-content: flex-end;
+    }
+
+    #wrap>nav a:first-child {
+        margin-right: auto;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+
+    #wrap>main {
+        flex-direction: row;
+    }
+
+    #wrap>main>aside {
+        background-color: #ccc;
+        padding: 0 1rem;
+        min-width: 250px;
+        max-width: 250px;
+        border-top: none;
+        border-left: 1px dotted black;
+    }
+
+}
+
+.aside-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.aside-article {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 90%;
+}
+
+.aside-article img {
+    display: block;
+    width: 4rem;
+    height: auto;
+    margin-right: .5rem;
+}
+
+.aside-article:hover {
+    background-color: #eee;
+}
+
+@media (max-width: 499px) {
+    .aside-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 767px) {
+    .aside-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .aside-article:nth-child(odd) {
+        justify-self: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .aside-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.red {
+    color: red;
+}
+
+.small {
+    font-size: small;
 }
