@@ -1,6 +1,3 @@
-Here's a README template you can use for your GitHub repository:
-
-```markdown
 # MyBlog
 
 MyBlog é uma aplicação web simples para publicação de artigos, onde usuários podem comentar e interagir com o conteúdo. O projeto foi desenvolvido em Flask e utiliza um banco de dados MySQL.
