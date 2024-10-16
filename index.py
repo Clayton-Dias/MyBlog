@@ -1,6 +1,6 @@
 # Importação do Flask: Aqui estamos importando a classe Flask do pacote Flask, que é um microframework para construção de aplicações web em Python.
 from flask import Flask, redirect, render_template, request, url_for
-from flask_mail import Mail, Message
+#from flask_mail import Mail, Message
 from flask_mysqldb import MySQL, MySQLdb
 
 # Importar as funções do banco de dados, tabela article
@@ -39,7 +39,7 @@ app.config.update(
 # Variável de conexão com o MySQL
 mysql = MySQL(app)
 
-
+'''
 # Configurações do servidor de e-mail
 app.config['MAIL_SERVER'] = 'smtp-mail.outlook.com'
 app.config['MAIL_PORT'] = 587
@@ -49,6 +49,7 @@ app.config['MAIL_PASSWORD'] = 'Senha123456'
 
 # Objeto de envio de e-mails
 mail = Mail(app)
+'''
 
 # @ -> anotation
 # Definição de rota: O decorador @app.route('/') define uma rota para a URL raiz (/). A função home() será chamada quando alguém acessar essa URL.
@@ -141,6 +142,7 @@ def view(artid):
         'site' : SITE,
         'title': article["art_title"],
         'css':'view.css',
+        'js':'view.js',
         'article': article,
         'articles': articles,
         'total_comments': total_comments,
@@ -156,9 +158,12 @@ def comment():
 
     # Obtém dados do formulario
     form = request.form
+
+    # Se o form está vazio
+    if form['name'] != None and form['name'] != '' and form['email'] != None and form['email'] != '':
     
-    # Salva o comentário no banco de dados
-    save_comment(mysql, form)
+        # Salva o comentário no banco de dados
+        save_comment(mysql, form)
     
     return redirect(f"{url_for('view', artid=form['artid'])}#comments")
 
@@ -184,7 +189,8 @@ def contacts():
         # Otém o primeiro nome do remetente
         first_name = form['name'].split()[0]
 
-         # Envia e-mail para o admin
+        '''
+        # Envia e-mail para o admin
         msg = Message(
             subject=form['subject'],
             sender=app.config['MAIL_USERNAME'],
@@ -192,11 +198,13 @@ def contacts():
             body= f'Foi enviado um contato para JocaBlog:\n\n{form['message']}'
         )
         mail.send(msg)
+        '''
 
     page = {
         "site": SITE,
         "title": "Faça contatos",
         "css": "contacts.css",
+        "js":'contacts.js',
         "success": success,
         "first_name": first_name
     }
@@ -204,6 +212,16 @@ def contacts():
     return render_template("contacts.html", page=page)
 
 
+@app.route('/profile')
+def profile():
+    toPage = {
+        'site': SITE,
+        'title': 'Pefil do usuário',
+        'css': 'profile.css',
+        'js': 'profile.js'
+    }
+
+    return render_template('profile.html', page=toPage)
 
 
 # Rota para a página de sobre (quem somos) → /about

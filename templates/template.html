@@ -34,7 +34,10 @@
             <div>
                 <a href="/"><img src="{{page.site.LOGO}}" alt="logotipo do site {{page.site.NAME}}"></a>
                 <h1>{{page.site.NAME}}</h1>
-                
+                <span id="loginUser" data-action="login">
+                    <img src="/static/img/user.png" alt="Login do usuário" referrerpolicy="no-referrer">
+                    <!--<i class="fa-regular fa-circle-user fa-fw"></i>-->
+                </span>
             </div>
             
             <form action="/search" method="get">
@@ -75,6 +78,9 @@
     </div>
 
     <!--Javascript-->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/static/js/template.js"></script>
     {%if page.js%}

@@ -1,0 +1,53 @@
+{% extends "template.html" %}
+
+{%block article%}
+
+<div id="logged">
+
+    <img src="/static/img/user.png" alt="Usuário não logado">
+
+    <h4>Usuário não logado</h4>
+
+    <ul>
+        <li id="id">ID</li>
+        <li id="email">mail@mail.com</li>
+        <li id="registered">xx/xx/xxxx</li>
+        <li id="lastLogin">yy/yy/yyyy</li>
+    </ul>
+
+    <p>Sua conta é gerenciada pelo Google.</p>
+    <p>Para editar seu perfil, clique no botão abaixo.</p>
+    <p class="center">
+        <button id="toGoogle">
+            <i class="fa-brands fa-google fa-fw"></i> Ver perfil no Google
+        </button>
+    </p>
+
+    <p>Clique no botão abaixo para sair do deslogar do site</p>
+    <p class="center">
+        <button id="btnLogout">
+            <i class="fa-solid fa-right-from-bracket fa-fw"></i>Deslogar
+        </button>
+    </p>
+
+</div>
+
+<div id="notLogged">
+    <h2>Perfil de usuário</h2>
+    <p>Logue-se para ver o seu perfil no {{ page.site.NAME }}.</p>
+    <p class="center">
+        <button id="btnLogin"><i class="fa-brands fa-google fa-fw"></i> Logue-se com o Google</button>
+    </p>
+</div>
+
+{% endblock %}
+
+
+{% block aside %}
+
+<h3>Saiba mais</h3>
+<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas repellat cupiditate asperiores quia nulla non
+    nemo, corrupti ratione error dolorum amet sapiente. Voluptate dolores consequuntur, quis consectetur deserunt
+    quibusdam ducimus.</p>
+
+{% endblock %}

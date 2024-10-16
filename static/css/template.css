@@ -56,6 +56,19 @@ a:hover {
 #wrap>header>div {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+#wrap>header>div>span{
+    margin-left: auto;   
+}
+
+#wrap>header>div>span>img {
+    margin-right: 1rem;
+    display: block;
+    cursor: pointer;
+    border-radius: 50%;
 }
 
 #wrap>header>div img {
