@@ -6,69 +6,56 @@
 
 <!-- Informações do autor e data -->
 <div class="author-date">
-    Por {{ page.article['sta_name'] }}
-    <span> em {{ page.article['art_datebr'] }}</span>
+    Por {{ page.article['sta_name'] }}  <!-- Nome do autor -->
+    <span> em {{ page.article['art_datebr'] }}</span>  <!-- Data do artigo em formato brasileiro -->
 </div>
 
 <!-- Conteúdo do artigo, seguro contra injeções de HTML -->
-{{ page.article['art_content'] | safe }}
-
+{{ page.article['art_content'] | safe }}  <!-- Renderiza o conteúdo HTML do artigo -->
 
 <div class="comment-form" id="comments">
-
     <h3>Comente aqui</h3>
 
     <form action="/comment" method="post" id="commentForm">
-        <input type="hidden" name="artid" value="{{page.article['art_id']}}">
-        <input type="hidden" name="name" value="" id="commentName">
-        <input type="hidden" name="email" value="" id="commentEmail">
-        <textarea name="comment" required minlength="5"></textarea>
+        <input type="hidden" name="artid" value="{{page.article['art_id']}}">  <!-- ID do artigo -->
+        <input type="hidden" name="name" value="" id="commentName">  <!-- Nome do comentarista (invisível) -->
+        <input type="hidden" name="email" value="" id="commentEmail">  <!-- Email do comentarista (invisível) -->
+        <textarea name="comment" required minlength="5"></textarea>  <!-- Campo para o comentário, com requisito de mínimo de 5 caracteres -->
 
         <div>
-            <button type="submit" title="&larr; Clique somente uma vez">Enviar</button>
-            <small><!--&larr; Clique somente uma vez--></small>
+            <button type="submit" title="&larr; Clique somente uma vez">Enviar</button>  <!-- Botão de envio do comentário -->
+            <small><!--&larr; Clique somente uma vez--></small>  <!-- Dica para o usuário -->
         </div>
     </form>
 
     <div id="makeLogin">
-        <p>Pra comentar você precisa estar logado em sua conta Google/Gmail.</p>
+        <p>Pra comentar você precisa estar logado em sua conta Google/Gmail.</p>  <!-- Mensagem informativa -->
         <p class="btn-center">
             <button id="loginGoogle" onclick="login()">
-                <i class="fa-brands fa-google fa-fw"></i> Logue-se com o Google
+                <i class="fa-brands fa-google fa-fw"></i> Logue-se com o Google  <!-- Botão para login com Google -->
             </button>
         </p>
     </div>
 </div>
 
-
 {% if page.total_comments == 0 %}
-
+<!-- Mensagem caso não haja comentários -->
 <p class="no-comment">Seja o primeiro a comentar!</p>
 
 {% else %}
-
 <div class="comment-list">
-
-    <h3>{{ page.total_comments }} comentários recentes</h3>
+    <h3>{{ page.total_comments }} comentários recentes</h3>  <!-- Título com a quantidade de comentários -->
 
     <div class="comment-grid">
-
         {% for comment in page.comments %}
-
         <div class="comment-box">
-            <small>Por {{ comment.com_author_name }} em {{ comment.com_datebr }}</small>
-            <div>{{ comment.com_comment }}</div>
+            <small>Por {{ comment.com_author_name }} em {{ comment.com_datebr }}</small>  <!-- Informações sobre o autor do comentário -->
+            <div>{{ comment.com_comment }}</div>  <!-- Conteúdo do comentário -->
         </div>
-
         {% endfor %}
-
     </div>
-
 </div>
-
 {% endif %}
-
-
 
 {% endblock %}
 
@@ -81,8 +68,8 @@
     <img src="{{ page.article['sta_image'] }}" alt="Foto do {{ page.article['sta_name'] }}">
 
     <ul>
-        <li>{{ page.article['sta_age'] }} anos</li>
-        <li>{{ page.article['sta_type'] }}</li>
+        <li>{{ page.article['sta_age'] }} anos</li>  <!-- Idade do autor -->
+        <li>{{ page.article['sta_type'] }}</li>  <!-- Tipo de autor (ex: Administrador, Autor) -->
     </ul>
 
     <!-- Descrição do autor -->
@@ -92,15 +79,15 @@
 <!-- Verifica se há artigos relacionados -->
 {% if page.articles %}
 <h3>
-    <i class="fa-solid fa-plus"></i> Artigos de {{ page.article['sta_first'] }}
+    <i class="fa-solid fa-plus"></i> Artigos de {{ page.article['sta_first'] }}  <!-- Título para artigos relacionados -->
 </h3>
 
 <div class="aside-grid">
     <!-- Loop através dos artigos relacionados -->
     {% for article in page.articles %}
-    <div class="aside-article" onclick="location.href = '/view/{{ article['art_id'] }}'">
-        <img src="{{ article['art_thumbnail'] }}" alt="{{ article['art_title'] }}">
-        <div>{{ article['art_title'] }}</div>
+    <div class="aside-article" onclick="location.href = '/view/{{ article['art_id'] }}'">  <!-- Redireciona ao clicar no artigo -->
+        <img src="{{ article['art_thumbnail'] }}" alt="{{ article['art_title'] }}">  <!-- Miniatura do artigo -->
+        <div>{{ article['art_title'] }}</div>  <!-- Título do artigo -->
     </div>
     {% endfor %}
 </div>

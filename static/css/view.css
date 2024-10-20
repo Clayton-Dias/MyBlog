@@ -1,159 +1,177 @@
 /* Folhas de estilo de `view.html` */
 
+/* Oculta o formulário de comentários e a seção de login inicialmente */
 #commentForm, 
 #makeLogin {
-    display: none;
+    display: none; /* Não exibe os elementos */
 }
 
+/* Estilização da data do autor de um comentário */
 .author-date {
-    background-color: #ddd;
-    padding: .25rem;
-    text-align: right;
-    font-size: 80%;
-    font-style: italic;
+    background-color: #ddd; /* Cor de fundo cinza claro */
+    padding: .25rem; /* Espaçamento interno */
+    text-align: right; /* Alinha o texto à direita */
+    font-size: 80%; /* Tamanho da fonte reduzido */
+    font-style: italic; /* Estilo de fonte em itálico */
 }
 
+/* Define o estilo para o span dentro de author-date */
 .author-date span {
-    display: block;
+    display: block; /* Exibe como bloco, ocupando toda a largura disponível */
 }
 
+/* Estilização do contêiner do autor */
 .aside-author {
-    margin-bottom: 1rem;
-    max-width: 250px;
-    margin: 1rem auto;
+    margin-bottom: 1rem; /* Espaço abaixo do contêiner */
+    max-width: 250px; /* Largura máxima do contêiner */
+    margin: 1rem auto; /* Margem superior/inferior de 1rem e centraliza horizontalmente */
 }
 
+/* Estilização da imagem do autor */
 .aside-author img {
-    display: block;
-    width: 100%;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+    display: block; /* Exibe como bloco */
+    width: 100%; /* Largura total do contêiner pai */
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4); /* Sombra ao redor da imagem */
 }
 
+/* Estilização da lista dentro do autor */
 .aside-author ul {
-    font-size: small;
-    padding-left: 2rem;
+    font-size: small; /* Tamanho de fonte pequeno */
+    padding-left: 2rem; /* Espaçamento à esquerda */
 }
 
+/* Estilos para telas com largura mínima de 575px */
 @media screen and (min-width: 575px) {
-
     .author-date span {
-        display: inline;
+        display: inline; /* Exibe como inline para telas maiores */
     }
-
 }
 
+/* Estilização do formulário de comentários */
 .comment-form {
-    margin-top: 2rem;
-    border-top: 3px double grey;
+    margin-top: 2rem; /* Espaçamento acima */
+    border-top: 3px double grey; /* Borda superior dupla cinza */
 }
 
+/* Estilo para elementos obrigatórios */
 .required {
-    color: red;
-    font-style: italic;
-    text-align: center;
-    font-size: 90%;
+    color: red; /* Texto vermelho */
+    font-style: italic; /* Estilo de fonte em itálico */
+    text-align: center; /* Alinha o texto ao centro */
+    font-size: 90%; /* Tamanho da fonte reduzido */
 }
 
+/* Estilo dos campos de comentário */
 .comment-field {
-    display: flex;
-    align-items: center;
-    margin-bottom: .625rem;
+    display: flex; /* Usar flexbox para layout */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+    margin-bottom: .625rem; /* Espaço abaixo de cada campo */
 }
 
+/* Estilização do formulário dentro do comment-form */
 .comment-form form {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto 1rem auto;
+    width: 100%; /* Largura total */
+    max-width: 500px; /* Largura máxima de 500px */
+    margin: 0 auto 1rem auto; /* Margens auto para centralizar horizontalmente */
 }
 
+/* Estilo dos rótulos dentro do formulário de comentários */
 .comment-form label {
-    width: 60px;
-    font-size: 90%;
+    width: 60px; /* Largura fixa do rótulo */
+    font-size: 90%; /* Tamanho da fonte reduzido */
 }
 
+/* Estilo dos inputs, textarea e botões do formulário */
 .comment-form input,
 .comment-form textarea,
 .comment-form button {
-    font-family: inherit;
-    font-size: inherit;
-    padding: .25rem .5rem;
-    border: 1px solid grey;
+    font-family: inherit; /* Herda a fonte do elemento pai */
+    font-size: inherit; /* Herda o tamanho da fonte do elemento pai */
+    padding: .25rem .5rem; /* Espaçamento interno */
+    border: 1px solid grey; /* Borda cinza */
 }
 
+/* Estiliza o campo de entrada para expandir */
 .comment-form input {
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que o input cresça para preencher o espaço disponível */
 }
 
+/* Estilo dos campos de entrada e textarea com fundo e borda personalizados */
 .comment-form input,
 .comment-form textarea {
-    background-color: rgb(255, 229, 229);
-    border-color: red;
-    border-bottom: 3px solid red;
+    background-color: rgb(255, 229, 229); /* Fundo rosa claro */
+    border-color: red; /* Borda vermelha */
+    border-bottom: 3px solid red; /* Borda inferior mais grossa e vermelha */
 }
 
+/* Estilo do textarea */
 .comment-form textarea {
-    resize: vertical;
-    height: 4rem;
-    width: 100%;
-    margin-bottom: .625rem;
+    resize: vertical; /* Permite redimensionar verticalmente */
+    height: 4rem; /* Altura fixa */
+    width: 100%; /* Largura total */
+    margin-bottom: .625rem; /* Espaço abaixo */
 }
 
+/* Estilo do botão no formulário de comentários */
 .comment-form button {
-    border: none;
-    background-color: grey;
-    color: white;
-    cursor: pointer;
-    padding: .5rem;
-    pointer-events: none;
+    border: none; /* Sem borda */
+    background-color: grey; /* Fundo cinza */
+    color: white; /* Texto branco */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    padding: .5rem; /* Espaçamento interno */
+    pointer-events: none; /* Desabilita eventos de clique inicialmente */
 }
 
+/* Estilo do botão ao passar o mouse */
 .comment-form button:hover {
-    background-color: rgb(48, 86, 117);
+    background-color: rgb(48, 86, 117); /* Muda a cor do fundo ao passar o mouse */
 }
 
+/* Estilo para pequenos textos dentro do formulário */
 .comment-form small {
-    color: gray;
+    color: gray; /* Texto cinza */
 }
 
-/* Campos / formulário válido */
-
+/* Estilos para campos e formulários válidos */
 .comment-form input:valid,
 .comment-form textarea:valid {
-    border-color: green;
-    border-bottom: 3px solid green;
-    background-color: rgb(233, 240, 254);
-
+    border-color: green; /* Borda verde para campos válidos */
+    border-bottom: 3px solid green; /* Borda inferior mais grossa e verde */
+    background-color: rgb(233, 240, 254); /* Fundo azul claro */
 }
 
+/* Estilo do botão quando o formulário é válido */
 .comment-form form:valid button {
-    background-color: steelblue;
-    pointer-events: all;
+    background-color: steelblue; /* Cor do fundo azul aço */
+    pointer-events: all; /* Habilita eventos de clique */
 }
 
+/* Estilo da caixa de comentários */
 .comment-box {
-    display: flex;
-    flex-direction: column;
-    border: 1px dotted grey;
-    margin-bottom: 1rem;
+    display: flex; /* Usar flexbox para layout */
+    flex-direction: column; /* Coluna para os itens */
+    border: 1px dotted grey; /* Borda pontilhada cinza */
+    margin-bottom: 1rem; /* Espaço abaixo da caixa de comentários */
 }
 
+/* Estilo do pequeno texto dentro da caixa de comentários */
 .comment-box small {
-    background-color: #ddd;
-    padding: .25rem;
+    background-color: #ddd; /* Fundo cinza claro */
+    padding: .25rem; /* Espaçamento interno */
 }
 
+/* Estilo das divs dentro da caixa de comentários */
 .comment-box div {
-    padding: .5rem;
-    font-size: 90%;
+    padding: .5rem; /* Espaçamento interno */
+    font-size: 90%; /* Tamanho da fonte reduzido */
 }
 
-
-/* Botão de login Google */
+/* Estilo do botão de login do Google */
 #loginGoogle {
-    background-color: steelblue;
-    display: block;
-    margin: auto;
-    pointer-events: all;
-    cursor: pointer;
-    border-radius: 5rem;
+    background-color: steelblue; /* Cor de fundo azul aço */
+    display: block; /* Exibe como bloco */
+    margin: auto; /* Centraliza horizontalmente */
+    pointer-events: all; /* Habilita eventos de clique */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    border-radius: 5rem; /* Bordas arredondadas */
 }

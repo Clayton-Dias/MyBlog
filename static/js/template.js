@@ -2,81 +2,82 @@
 
 // Dados para conexão com o Firebase 
 const firebaseConfig = {
-    apiKey: "XXXXXXXXXXXXXXYYYYYYYYYY",
-    authDomain: "myblog-flask.firebaseapp.com",
-    projectId: "myblog-flask",
-    storageBucket: "myblog-flask.appspot.com",
-    messagingSenderId: "534410500699",
-    appId: "1:534410500699:web:1352e94e2126ba8cee7d7e"
+    apiKey: "XXXXXXXXXXXXXXYYYYYYYYYY", // Chave da API
+    authDomain: "myblog-flask.firebaseapp.com", // Domínio de autenticação
+    projectId: "myblog-flask", // ID do projeto
+    storageBucket: "myblog-flask.appspot.com", // Bucket de armazenamento
+    messagingSenderId: "534410500699", // ID do remetente de mensagens
+    appId: "1:534410500699:web:1352e94e2126ba8cee7d7e" // ID do aplicativo
 };
 
-// Conexão com o Firebase, usando o dados para conexão
+// Conexão com o Firebase, usando os dados de configuração
 const app = firebase.initializeApp(firebaseConfig);
 
-// Seleciona o provedor de autenticação → Google (neste caso)
+// Seleciona o provedor de autenticação → Google
 var provider = new firebase.auth.GoogleAuthProvider();
 
-
+// Monitora mudanças no estado de autenticação do usuário
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        // Troca a ação do botão para 'profile'
-        $('#loginUserr').attr({'data-action': 'profile'})
+        // Se o usuário estiver logado, atualiza o botão para a ação 'profile'
+        $('#loginUserr').attr({'data-action': 'profile'});
+        
+        // Atualiza a imagem do usuário logado
         $('#loginUser img').attr({
-            'src': user.photoURL,
-            'alt': user.displayName
-        })
+            'src': user.photoURL, // URL da foto do perfil do usuário
+            'alt': user.displayName // Nome de exibição do usuário como texto alternativo
+        });
     } else {
-        // Troca a ação do botão para 'login'
-        $('#loginUserr').attr({ 'data-action': 'login' })
-        // Troca para a imagem do usuário
+        // Se não houver usuário logado, atualiza o botão para a ação 'login'
+        $('#loginUserr').attr({'data-action': 'login'});
+        
+        // Define a imagem padrão para usuários não logados
         $('#loginUser img').attr({
-            'src': '/static/img/user.png',
-            'alt': 'Logue-se'
-        })
+            'src': '/static/img/user.png', // Imagem padrão quando não está logado
+            'alt': 'Logue-se' // Texto alternativo padrão
+        });
     }
 });
 
-// Login
+// Função para login do usuário
 function login() {
-    // Faz login pelo Google usando popup
+    // Faz login pelo Google usando um popup
     firebase.auth().signInWithPopup(provider);
-};
+}
 
-// logout
+// Função para logout do usuário
 function logout() {
-    firebase.auth().signOut();
+    firebase.auth().signOut(); // Desconecta o usuário
 }
 
-// Excluir conta do uduário
+// Função para excluir a conta do usuário
 function userRemove() {
-    const user = firebase.auth().currentUser;
-    user.delete();
+    const user = firebase.auth().currentUser; // Obtém o usuário atual
+    user.delete(); // Exclui a conta do usuário logado
 }
 
-
-// Inicializa jQuery
+// Inicializa jQuery e configura o aplicativo principal
 $(document).ready(myApp);
 
-// Aplicativo Principal
+// Função principal do aplicativo
 function myApp() {
-    //Monitora cliques no botão de login/logout
+    // Monitora cliques no botão de login/logout
     $('#loginUser').click(userToggle);
 }
 
-
-//Login/Logout do usuário
+// Função para alternar entre login e logout do usuário
 function userToggle() {
-
-    // Lê o atributo 'data-action' do elemento '#btnUser'
+    // Lê o atributo 'data-action' do elemento '#loginUser'
     if ($('#loginUser').attr('data-action') == 'login') {
-        //executa o login
-        login()
+        // Se o atributo for 'login', executa o login
+        login();
     } else {
+        // Caso contrário, redireciona para o perfil do usuário
         // Temporário: faz logout
-        // logout();
+        // logout(); // (comentado por enquanto)
         
-        // Mostra o perfil do usuári
+        // Redireciona para a página de perfil
         location.href = '/profile';
     }
-
 }
+

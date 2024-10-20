@@ -23,16 +23,10 @@ SITE = {
 app = Flask(__name__)
 
 # Configurações de acesso ao MySQL
-'''
-app.config['MYSQL_HOST'] = 'localhost'  # Servidor do MySQL
-app.config['MYSQL_USER'] = 'root'       # Usuário do MySQL
-app.config['MYSQL_PASSWORD'] = ''       # Senha do MySQL
-app.config['MYSQL_DB'] = 'myblogdb'     # Nome da base de dados
-'''
 app.config.update(
     MYSQL_HOST='localhost',       # Servidor do MySQL
     MYSQL_USER='root',            # Usuário do MySQL
-    MYSQL_PASSWORD='',            # Senha do MySQL
+    MYSQL_PASSWORD='',      # Senha do MySQL
     MYSQL_DB='myblogdb'           # Nome da base de dados
 )
 
@@ -79,6 +73,7 @@ def home():
     # Renderiza template passando a variável local `toPage`
     # para o template como `page`.
     return render_template("home.html", page=toPage)
+
 
 # Rota para visualizar um artigo específico
 @app.route('/view/<artid>')
@@ -209,9 +204,9 @@ def contacts():
         "first_name": first_name
     }
 
-    return render_template("contacts.html", page=page)
-
-
+    return render_template("contacts.html", page=page) # Renderiza a página de contatos
+ 
+# Rota para o perfil do usuário
 @app.route('/profile')
 def profile():
     toPage = {
@@ -221,7 +216,7 @@ def profile():
         'js': 'profile.js'
     }
 
-    return render_template('profile.html', page=toPage)
+    return render_template('profile.html', page=toPage) # Renderiza a página de perfil
 
 
 # Rota para a página de sobre (quem somos) → /about
@@ -232,8 +227,8 @@ def about():
         "title": "Sobre",
         "css": "about.css"       
     }
-    return render_template("about.html", page=page)
-
+    return render_template("about.html", page=page) # Renderiza a página sobre
+ 
 # Manipulador de erro 404
 @app.errorhandler(404)
 def page_not_found(e):
@@ -242,7 +237,7 @@ def page_not_found(e):
         'site': SITE,
         'css': '404.css'
     }
-    return render_template('404.html', page=toPage), 404
+    return render_template('404.html', page=toPage), 404 # Renderiza a página 404
 
 
 # Manipulador de erro 405

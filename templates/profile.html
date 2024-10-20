@@ -1,42 +1,41 @@
 {% extends "template.html" %}
 
-{%block article%}
+{% block article %}
 
 <div id="logged">
+    <img src="/static/img/user.png" alt="Usuário não logado">  <!-- Imagem do usuário não logado -->
 
-    <img src="/static/img/user.png" alt="Usuário não logado">
-
-    <h4>Usuário não logado</h4>
+    <h4>Usuário não logado</h4>  <!-- Título informando que o usuário não está logado -->
 
     <ul>
-        <li id="id">ID</li>
-        <li id="email">mail@mail.com</li>
-        <li id="registered">xx/xx/xxxx</li>
-        <li id="lastLogin">yy/yy/yyyy</li>
+        <li id="id">ID</li>  <!-- Exibe o ID do usuário -->
+        <li id="email">mail@mail.com</li>  <!-- Exibe o e-mail do usuário -->
+        <li id="registered">xx/xx/xxxx</li>  <!-- Data de registro do usuário -->
+        <li id="lastLogin">yy/yy/yyyy</li>  <!-- Data do último login -->
     </ul>
 
-    <p>Sua conta é gerenciada pelo Google.</p>
-    <p>Para editar seu perfil, clique no botão abaixo.</p>
+    <p>Sua conta é gerenciada pelo Google.</p>  <!-- Informação sobre a conta do usuário -->
+    <p>Para editar seu perfil, clique no botão abaixo.</p>  <!-- Instrução para editar o perfil -->
     <p class="center">
         <button id="toGoogle">
-            <i class="fa-brands fa-google fa-fw"></i> Ver perfil no Google
+            <i class="fa-brands fa-google fa-fw"></i> Ver perfil no Google  <!-- Botão para visualizar o perfil no Google -->
         </button>
     </p>
 
-    <p>Clique no botão abaixo para sair do deslogar do site</p>
+    <p>Clique no botão abaixo para sair do deslogar do site</p>  <!-- Instrução para deslogar -->
     <p class="center">
         <button id="btnLogout">
-            <i class="fa-solid fa-right-from-bracket fa-fw"></i>Deslogar
+            <i class="fa-solid fa-right-from-bracket fa-fw"></i> Deslogar  <!-- Botão para deslogar -->
         </button>
     </p>
 
 </div>
 
 <div id="notLogged">
-    <h2>Perfil de usuário</h2>
-    <p>Logue-se para ver o seu perfil no {{ page.site.NAME }}.</p>
+    <h2>Perfil de usuário</h2>  <!-- Título da seção para usuários não logados -->
+    <p>Logue-se para ver o seu perfil no {{ page.site.NAME }}.</p>  <!-- Mensagem informando que é necessário logar -->
     <p class="center">
-        <button id="btnLogin"><i class="fa-brands fa-google fa-fw"></i> Logue-se com o Google</button>
+        <button id="btnLogin"><i class="fa-brands fa-google fa-fw"></i> Logue-se com o Google</button>  <!-- Botão para login com Google -->
     </p>
 </div>
 
@@ -45,9 +44,9 @@
 
 {% block aside %}
 
-<h3>Saiba mais</h3>
+<h3>Saiba mais</h3>  <!-- Título da seção lateral -->
 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas repellat cupiditate asperiores quia nulla non
     nemo, corrupti ratione error dolorum amet sapiente. Voluptate dolores consequuntur, quis consectetur deserunt
-    quibusdam ducimus.</p>
+    quibusdam ducimus.</p>  <!-- Texto informativo de exemplo -->
 
 {% endblock %}

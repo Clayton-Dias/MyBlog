@@ -1,67 +1,67 @@
-{% extends "template.html" %}
+{% extends "template.html" %}  {# Este comando indica que o arquivo atual estende um template base chamado "template.html" #}
 
-
-{% block article %}
+{% block article %}  {# Início do bloco "article", que será preenchido na página final #}
 
 <h2>Faça Contato</h2>
 
+{# Verifica se a mensagem de sucesso foi enviada #}
 {% if page.success == True%}
 
 <h3>Olá, {{page.first_name}}</h3>
 <blockquote>Sua mensagem foi enviada...</blockquote>
 <p><em>Obrigado.</em></p>
 
+{# Se não houve sucesso, exibe o formulário de contato #}
 {% else %}
 
 <p>Preencha os campos abaixo para entrar em contato conosco</p>
 
 <p class="required">Todos os campos são obrigatórios.</p>
 
-
+{# Formulário de contato que envia dados via POST para a rota /contacts #}
 <form action="/contacts" method="post" id="contacts">
 
     <p>
         <label for="name">Seu nome:</label>
-        <input type="text" name="name" id="name" required minlength="3">
+        <input type="text" name="name" id="name" required minlength="3"> {# Campo de texto para o nome, obrigatório e deve ter pelo menos 3 caracteres #}
     </p>
 
     <p>
         <label for="email">Seu email:</label>
-        <input type="email" name="email" id="email" required>
+        <input type="email" name="email" id="email" required> {# Campo de entrada para o e-mail, obrigatório #}
     </p>
 
     <p>
         <label for="subject">Assunto:</label>
-        <input type="text" name="subject" id="subject" required minlength="5">
+        <input type="text" name="subject" id="subject" required minlength="5"> {# Campo de texto para o assunto, obrigatório e deve ter pelo menos 5 caracteres #}
     </p>
 
     <p>
         <label for="message">Mensagem:</label>
-        <textarea name="message" id="message" required minlength="5"></textarea>
+        <textarea name="message" id="message" required minlength="5"></textarea> {# Área de texto para a mensagem, obrigatória e deve ter pelo menos 5 caracteres #}
     </p>
     <p>
-        <button type="submit"><i class="fa-solid fa-share fa-fw"></i> Enviar</button>
-        <small>&larr; Clique somente uma vez</small>
+        <button type="submit"><i class="fa-solid fa-share fa-fw"></i> Enviar</button> {# Botão para enviar o formulário #}
+        <small>&larr; Clique somente uma vez</small> {# Instrução para o usuário #}
     </p>
-
 
 </form>
 
-{% endif %}
+{% endif %} {# Fim da condição para exibir o formulário ou a mensagem de sucesso #}
 
+{# Script para evitar o reenvio do formulário ao atualizar a página #}
 <script>
-    // Evita o reenvio dos formulários ao atualizar a página
     if (window.history.replaceState) window.history.replaceState(null, null, window.location.href);
 </script>
 
-{% endblock %}
+{% endblock %}  {# Fim do bloco "article" #}
 
-
-{% block aside %}
+{% block aside %}  {# Início do bloco "aside", para conteúdo adicional #}
 
 <h3>Siga nossas redes sociais</h3>
 <ul>
-    <li>Facebook</li>
+    <li>Facebook</li> {# Lista de redes sociais #}
     <li>Instagram</li>
 </ul>
-{% endblock %}
+
+{% endblock %}  {# Fim do bloco "aside" #}

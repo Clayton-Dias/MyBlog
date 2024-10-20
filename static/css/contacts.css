@@ -1,58 +1,62 @@
+/* Estilos para a seção de contatos */
+
 #contacts {
-    display: block;
-    margin: auto;
-    width: 100%;
-    max-width: 550px;
+    display: block; /* Define o elemento como bloco */
+    margin: auto; /* Centraliza horizontalmente */
+    width: 100%; /* Largura total do contêiner */
+    max-width: 550px; /* Largura máxima de 550px */
 }
 
 .required {
-    text-align: center;
-    color: red;
-    font-style: italic;
-    font-size: small;
+    text-align: center; /* Centraliza o texto */
+    color: red; /* Define a cor do texto como vermelho */
+    font-style: italic; /* Aplica itálico ao texto */
+    font-size: small; /* Tamanho de fonte pequeno */
 }
 
 #contacts label {
-    display: block;
-    padding: 0 0 .25rem .25rem;
+    display: block; /* Exibe o rótulo como bloco */
+    padding: 0 0 .25rem .25rem; /* Espaçamento ao redor do rótulo */
 }
 
 #contacts input,
 #contacts textarea,
 #contacts button {
-    font-family: inherit;
-    font-size: inherit;
+    font-family: inherit; /* Usa a mesma fonte que o elemento pai */
+    font-size: inherit; /* Usa o mesmo tamanho de fonte que o elemento pai */
 }
 
 #contacts input,
 #contacts textarea {
-    padding: .5rem;
-    width: 100%;
-    border: 1px solid red;
-    background-color: rgb(255, 235, 235);
+    padding: .5rem; /* Espaçamento interno */
+    width: 100%; /* Largura total do campo */
+    border: 1px solid red; /* Borda vermelha padrão */
+    background-color: rgb(255, 235, 235); /* Fundo rosa claro */
 }
 
 #contacts textarea {
-    resize: vertical;
-    height: 6rem;
+    resize: vertical; /* Permite redimensionar verticalmente */
+    height: 6rem; /* Altura fixa de 6rem */
 }
 
 #contacts button {
-    padding: .5rem 1rem;
-    background-color: grey;
-    color: white;
-    border: none;
-    pointer-events: none;
+    padding: .5rem 1rem; /* Espaçamento interno */
+    background-color: grey; /* Fundo cinza */
+    color: white; /* Texto branco */
+    border: none; /* Sem borda */
+    pointer-events: none; /* Desabilita interações até que o formulário seja válido */
 }
 
+/* Estilos aplicados quando o campo é válido */
 #contacts input:valid,
 #contacts textarea:valid {
-    border: 1px solid blue;
-    background-color: rgb(232, 240, 254);
+    border: 1px solid blue; /* Borda azul quando o campo é válido */
+    background-color: rgb(232, 240, 254); /* Fundo azul claro quando válido */
 }
 
+/* Estilos do botão quando o formulário é válido */
 #contacts:valid button {
-    background-color: steelblue;
-    pointer-events: all;
-    cursor: pointer;
-} 
+    background-color: steelblue; /* Muda o fundo para azul-escuro quando o formulário é válido */
+    pointer-events: all; /* Permite interações no botão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}

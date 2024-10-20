@@ -1,63 +1,66 @@
+/* Estilos para a grade de artigos */
+
 .article-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 1rem;
+    display: flex; /* Usa o modelo flexbox para layout */
+    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha se não houver espaço */
+    justify-content: center; /* Centraliza os itens na linha */
+    margin-bottom: 1rem; /* Adiciona espaço abaixo da grade */
 }
 
 .article-box {
-    display: flex;
-    flex-direction: column;
-    border: 1px dotted grey;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    flex: 1 1 100%;
-    margin: 0.5rem;
+    display: flex; /* Usa o modelo flexbox para o conteúdo interno */
+    flex-direction: column; /* Organiza os itens em coluna */
+    border: 1px dotted grey; /* Adiciona uma borda pontilhada cinza ao redor do artigo */
+    margin-bottom: 1rem; /* Espaçamento abaixo de cada artigo */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    flex: 1 1 100%; /* Permite que o artigo ocupe 100% do espaço disponível inicialmente */
+    margin: 0.5rem; /* Espaçamento lateral entre os artigos */
 }
 
 .article-box:hover {
-    background-color: #ddd;
+    background-color: #ddd; /* Muda a cor de fundo ao passar o mouse sobre o artigo */
 }
 
 .article-box img {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Faz a imagem ocupar toda a largura do contêiner */
+    height: auto; /* Mantém a proporção da imagem */
 }
 
 .article-box div {
-    padding: .5rem;
-    font-size: small;
+    padding: .5rem; /* Adiciona espaço interno ao contêiner do texto */
+    font-size: small; /* Define um tamanho de fonte pequeno */
 }
 
 .article-box div h4 {
-    margin: 0 0 .25rem 0;
-    font-size: 1rem;
+    margin: 0 0 .25rem 0; /* Margens em torno do título */
+    font-size: 1rem; /* Tamanho da fonte do título */
 }
 
+/* Estilos responsivos para diferentes larguras de tela */
 @media (min-width: 425px) and (max-width: 574px) {
     .article-box {
-        flex: 1 1 calc(50% - 1rem);
-        max-width: calc(50% - 1rem);
+        flex: 1 1 calc(50% - 1rem); /* Permite que dois artigos ocupem a linha */
+        max-width: calc(50% - 1rem); /* Limita a largura máxima a 50% menos 1rem */
     }
 }
 
 @media (min-width: 575px) and (max-width: 767px) {
     .article-box {
-        flex: 1 1 calc(33.33% - 1rem);
-        max-width: calc(33.33% - 1rem);
+        flex: 1 1 calc(33.33% - 1rem); /* Permite que três artigos ocupem a linha */
+        max-width: calc(33.33% - 1rem); /* Limita a largura máxima a 33.33% menos 1rem */
     }
 }
 
 @media (min-width: 768px) and (max-width: 919px) {
     .article-box {
-        flex: 1 1 calc(50% - 1rem);
-        max-width: calc(50% - 1rem);
+        flex: 1 1 calc(50% - 1rem); /* Retorna a configuração para dois artigos por linha */
+        max-width: calc(50% - 1rem); /* Limita a largura máxima a 50% menos 1rem */
     }
 }
 
 @media (min-width: 920px) {
     .article-box {
-        flex: 1 1 calc(33.33% - 1rem);
-        max-width: calc(33.33% - 1rem);
+        flex: 1 1 calc(33.33% - 1rem); /* Permite que três artigos ocupem a linha em telas maiores */
+        max-width: calc(33.33% - 1rem); /* Limita a largura máxima a 33.33% menos 1rem */
     }
 }

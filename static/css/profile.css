@@ -1,4 +1,5 @@
+/* Esconde os elementos com IDs 'logged' e 'notLogged' */
 #logged,
 #notLogged {
-    display: none;
+    display: none; /* Define o display como 'none' para ocultar os elementos */
 }
