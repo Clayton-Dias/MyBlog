@@ -18,6 +18,28 @@ SITE = {
     "LOGO": "/static/img/icone.png",   
 }
 
+#Lista de redes sociais
+SOCIAL = (
+    {
+        'name': 'Facebook',
+        'link': 'https://facebook.com',
+        'icon': '<i class="fa-brands fa-square-facebook fa-fw"></i>'
+    },
+    {
+        'name': 'Linkedin',
+        'link': 'https://linkedin.com/',
+        'icon': '<i class="fa-brands fa-linkedin fa-fw"></i>'
+    },
+    {
+        'name': 'Youtube',
+        'link': 'https://youtube.com/',
+        'icon': '<i class="fa-brands fa-square-youtube fa-fw"></i>'
+    }, {
+        'name': 'GitHub',
+        'link': 'https://github.com/',
+        'icon': '<i class="fa-brands fa-square-github fa-fw"></i>'
+    },
+)
 
 # Inicialização da aplicação: Criamos uma instância da classe Flask. O argumento __name__ ajuda o Flask a determinar o caminho da aplicação e a localizar recursos como templates e arquivos estáticos.
 app = Flask(__name__)
@@ -55,6 +77,12 @@ def home():
     # Obtém todos os artigos
     articles = get_all(mysql)
 
+    # Obtém artigos mais comentados
+    commenteds = most_commented(mysql)
+
+    # Obtém artigos mais vistos(visualizados)
+    views = most_view(mysql)
+
     # Somente para debug
     # Funciona somente quando a route para a raiz for acionada
     # print('\n\n\n', articles, '\n\n\n')
@@ -68,7 +96,11 @@ def home():
         "js": "home.js",            # JavaScript desta página (opcional)
 
         # Outras chaves usadas pela página
-        'articles': articles
+        'articles': articles,
+        
+        'commenteds': commenteds,
+
+        'views': views
     }
     # Renderiza template passando a variável local `toPage`
     # para o template como `page`.
@@ -201,7 +233,8 @@ def contacts():
         "css": "contacts.css",
         "js":'contacts.js',
         "success": success,
-        "first_name": first_name
+        "first_name": first_name,
+        'social': SOCIAL
     }
 
     return render_template("contacts.html", page=page) # Renderiza a página de contatos
@@ -251,6 +284,40 @@ def page_not_found(e):
     #return render_template('405.html', page=toPage), 405
     return 'Errou'
 
+
+@app.route('/search')
+def search():
+
+    query = request.args.get('q')
+
+    articles = article_search(mysql,query)
+
+    total = len(articles)
+
+    recents = get_all(mysql, 5)
+    
+    page = {
+        'title': 'Pesquisa',
+        'site': SITE,
+        'css': 'home.css',
+        'articles': articles,
+        'total': total,
+        'query': query,
+        'recents': recents
+    }
+
+    return render_template('search.html', page=page)
+
+
+@app.route("/policies")
+def policies():
+    page = {
+        "site": SITE,
+        "title": "Política de Privacidade",
+        "css": "policies.css",
+    }
+    # Renderiza o template policies.html
+    return render_template("policies.html", page=page)
 
 # Verificação de execução: Este bloco garante que o código dentro dele só será executado se o script for executado diretamente, e não se for importado como um módulo em outro script.
 if __name__ == '__main__':

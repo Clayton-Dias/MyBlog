@@ -60,3 +60,38 @@
     pointer-events: all; /* Permite interações no botão */
     cursor: pointer; /* Muda o cursor para indicar que é clicável */
 }
+
+
+#social_net {
+    display: flex; /* Utiliza Flexbox para alinhar os itens */
+    justify-content: space-evenly; /*Espaça os ícones uniformemente */
+    flex-wrap: wrap; /* Permite que os ícones quebrem em várias linhas se necessário */
+    margin: 10px 0;
+    flex-direction: row;
+}
+
+#social_net a {
+    display: flex; /* Define o link como um flex container */
+    flex-direction: column; /* Alinha o ícone e o nome em coluna */
+    align-items: center; /* Centraliza os itens dentro do link */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    color: inherit; /* Herda a cor do texto do elemento pai */
+    margin: 10px; /* Adiciona espaçamento entre os ícones */
+    width: 40%;
+}
+
+#social_net i {
+    font-size: 1.8rem; /* Aumenta o tamanho dos ícones para melhor visibilidade */
+    margin-bottom: 5px; /* Adiciona espaço abaixo do ícone para separação do texto */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    #social_net {
+        justify-content: center; /* Centraliza os ícones em telas menores */
+    }
+
+    #social_net a {
+        margin: 5px; /* Ajusta o espaçamento entre os ícones para dispositivos menores */
+    }
+}

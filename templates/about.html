@@ -1,28 +1,24 @@
-{% extends "template.html" %}
+{% extends "template.html" %}  {# Este comando indica que o arquivo atual estende um template base chamado "template.html" #}
 
-{%block article%}
+{% block article %}  {# Início do bloco "article", que será preenchido na página final #}
 
-<h1>Quem somos</h1>
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio harum, consequuntur
-    qui in fuga voluptatum unde ipsam. Atque, voluptas fugiat ullam sapiente recusandae, dolores
-    molestias culpa, quidem perspiciatis minima earum?
-</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sequi debitis nulla sit soluta
-    deserunt quod ea ullam beatae praesentium fugiat facilis doloremque optio ipsam, enim ut. Molestias,
-    soluta hic.</p>
-<img src="https://picsum.photos/id/1/200/300" alt="Foto aleatória">
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio harum, consequuntur
-    qui in fuga voluptatum unde ipsam. Atque, voluptas fugiat ullam sapiente recusandae, dolores
-    molestias culpa, quidem perspiciatis minima earum?
-</p>
-{% endblock %}
+<h2>Sobre Nós</h2>
 
+<div class="about-content">
+    <p>Bem-vindo à nossa página! Somos uma equipe dedicada a trazer informações e conteúdos de qualidade para nossos leitores. Nossa missão é inspirar, educar e manter você informado sobre uma variedade de tópicos.</p>
+    
+    <p>Nosso site foi criado para ser um espaço inclusivo e acessível, onde todos podem encontrar algo interessante para ler, aprender e compartilhar. Nós valorizamos a interação com nossos leitores, então fique à vontade para entrar em contato conosco ou deixar um comentário em nossos artigos.</p>
+        
+    <p>Esperamos que você aproveite o conteúdo que preparamos para você.</p>
 
-{% block aside %}
+    <p><strong>Obrigado por nos visitar!</strong></p>
+</div>
 
-<h3>Saiba mais</h3>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas repellat cupiditate asperiores quia nulla non nemo, corrupti ratione error dolorum amet sapiente. Voluptate dolores consequuntur, quis consectetur deserunt quibusdam ducimus.</p>
+{% endblock %}  {# Fim do bloco "article" #}
 
-{% endblock %}
+{% block aside %}  {# Início do bloco "aside", para conteúdo adicional #}
+
+<h3>Entre em Contato</h3>
+<p>Se você quiser saber mais sobre nossa equipe ou nossos serviços, não hesite em <a href="/contacts">entrar em contato</a>.</p>
+
+{% endblock %}  {# Fim do bloco "aside" #}

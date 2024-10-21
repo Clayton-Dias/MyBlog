@@ -2,13 +2,14 @@
 
 // Dados para conexão com o Firebase 
 const firebaseConfig = {
-    apiKey: "XXXXXXXXXXXXXXYYYYYYYYYY", // Chave da API
+    apiKey: "AIzaSyCIuxdcem7bHs6W17Y4OTLSfMaIkm4AN00", // Chave da API
     authDomain: "myblog-flask.firebaseapp.com", // Domínio de autenticação
     projectId: "myblog-flask", // ID do projeto
     storageBucket: "myblog-flask.appspot.com", // Bucket de armazenamento
     messagingSenderId: "534410500699", // ID do remetente de mensagens
     appId: "1:534410500699:web:1352e94e2126ba8cee7d7e" // ID do aplicativo
 };
+
 
 // Conexão com o Firebase, usando os dados de configuração
 const app = firebase.initializeApp(firebaseConfig);

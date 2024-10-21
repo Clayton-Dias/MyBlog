@@ -39,7 +39,7 @@
             </div>
             
             <form action="/search" method="get">  <!-- Formulário de busca -->
-                <input type="search" name="q" placeholder="Procurar...">  <!-- Campo de busca -->
+                <input type="search" name="q" placeholder="Procurar..." value="{{page.query}}">  <!-- Campo de busca -->
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>  <!-- Botão de envio da busca -->
             </form>
         </header>
@@ -65,7 +65,7 @@
             <div>
                 © 2024 {{ page.site.OWNER }}  <!-- Informação de copyright com o nome do proprietário -->
                 <small>
-                    <a href="/contacts">Faça contato</a>&nbsp;|&nbsp;<a href="/privacy">Políticas de Privacidade</a>  <!-- Links para contato e políticas de privacidade -->
+                    <a href="/contacts">Faça contato</a>&nbsp;|&nbsp;<a href="/policies">Políticas de Privacidade</a>  <!-- Links para contato e políticas de privacidade -->
                 </small>
             </div>
             <a href="#wrap"><i class="fa-solid fa-circle-up fa-fw"></i></a>  <!-- Botão para voltar ao topo da página -->            

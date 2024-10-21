@@ -3,13 +3,13 @@
 {% block article %}
 
 <div id="logged">
-    <img src="/static/img/user.png" alt="Usuário não logado">  <!-- Imagem do usuário não logado -->
-
     <h4>Usuário não logado</h4>  <!-- Título informando que o usuário não está logado -->
 
-    <ul>
-        <li id="id">ID</li>  <!-- Exibe o ID do usuário -->
-        <li id="email">mail@mail.com</li>  <!-- Exibe o e-mail do usuário -->
+    <img src="/static/img/user.png" alt="Usuário anônimo" referrerpolicy="no-referrer">
+    <div id="email">anonimous@email.com</div>
+    <small id="id">Sem Id</small>
+
+    <ul>        
         <li id="registered">xx/xx/xxxx</li>  <!-- Data de registro do usuário -->
         <li id="lastLogin">yy/yy/yyyy</li>  <!-- Data do último login -->
     </ul>
@@ -44,9 +44,11 @@
 
 {% block aside %}
 
-<h3>Saiba mais</h3>  <!-- Título da seção lateral -->
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas repellat cupiditate asperiores quia nulla non
-    nemo, corrupti ratione error dolorum amet sapiente. Voluptate dolores consequuntur, quis consectetur deserunt
-    quibusdam ducimus.</p>  <!-- Texto informativo de exemplo -->
+<h3>Links úteis</h3>
+<ul>
+    <li><a href="/about">Sobre...</a></li>
+    <li><a href="/contacts">Faça contato</a></li>
+    <li><a href="/policies">Sua privacidade</a></li>
+</ul>
 
 {% endblock %}

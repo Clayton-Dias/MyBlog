@@ -1,1 +1,26 @@
-/**CSS do about.html**/
+/* Estilo padrão para a página About */
+.about-content {
+    padding: 20px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Estilo responsivo para mobile */
+@media (max-width: 768px) {
+    .about-content {
+        padding: 10px;
+        text-align: left;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .about-content h2, .about-content h3 {
+        font-size: 1.2em;
+    }
+
+    .about-content p {
+        font-size: 0.9em;
+    }
+
+}

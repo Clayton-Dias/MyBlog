@@ -56,12 +56,26 @@
 
 {% endblock %}  {# Fim do bloco "article" #}
 
+
 {% block aside %}  {# Início do bloco "aside", para conteúdo adicional #}
 
-<h3>Siga nossas redes sociais</h3>
-<ul>
-    <li>Facebook</li> {# Lista de redes sociais #}
-    <li>Instagram</li>
-</ul>
+
+<h3><i class="fa-solid fa-user-plus fa-fw"></i> Contatos </h3>
+<p>Siga nossas redes sociais para ficar por dentro das novidades.</p>
+
+<div id="social_net">
+    {% for net in page.social %}
+
+
+        <a href="{{ net.link}}" target="_blank">
+            {{ net.icon | safe }}
+            <span>{{net.name}}</span>
+        </a>
+
+    {% endfor %}
+</div>
+
+<p><i class="fa-solid fa-share-nodes"></i> E compartilhe com seus amigos e sua familia.</p>
+
 
 {% endblock %}  {# Fim do bloco "aside" #}

@@ -1,9 +1,15 @@
 from flask_mysqldb import MySQL, MySQLdb
 
 
-def get_all(mysql):  # Obtem todos os artigos na página inicial
+def get_all(mysql, limit=0):  # Obtem todos os artigos na página inicial
+
+    if limit == 0:
+        subsql = ''
+    else:
+        subsql = f'LIMIT {limit}'
+
     # Consulta SQL
-    sql = '''
+    sql = f'''
         -- Seleciona os campos art_id, art_title, art_resume e art_thumbnail da tabela article
         SELECT art_id, art_title, art_resume, art_thumbnail
 
@@ -15,7 +21,8 @@ def get_all(mysql):  # Obtem todos os artigos na página inicial
         AND art_date <= NOW()    -- Compara a data do artigo com a data e hora atuais
 
         -- Ordena os resultados pela data do artigo em ordem decrescente (do mais recente para o mais antigo)
-        ORDER BY art_date DESC;
+        ORDER BY art_date DESC
+         {subsql};
     '''
 
     # Executa a query e obtém os dados na forma de DICT
@@ -96,3 +103,103 @@ def get_plus(mysql, staid, artid, limit):
     cur.close()
 
     return articles
+
+
+
+def article_search(mysql, query, limit=0):
+
+    if limit == 0:
+        subsql = ''
+    else:
+        subsql = f'LIMIT {limit}'
+    
+    sql = f'''
+        SELECT art_id, art_title, art_resume, art_thumbnail
+        FROM article 
+        WHERE (
+            art_title LIKE %s
+            OR art_resume LIKE %s
+            or art_content LIKE %s
+        )
+            AND art_status = 'on' 
+            AND art_date <= NOW()
+        ORDER BY art_date DESC
+        {subsql};
+        '''
+    
+    like_term = f'%{query}%'
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute(sql, (like_term, like_term, like_term, ))
+    articles = cur.fetchall()
+    cur.close()
+
+    return articles
+
+
+def most_commented(mysql, limit=4):
+    
+    sql = '''
+         -- Seleciona os campos e a contagem de comentários
+        SELECT 
+            a.art_id, 
+            a.art_title,
+            a.art_thumbnail,
+            COUNT(c.com_id) AS comment_count
+        FROM 
+            article a
+        
+        -- Faz um LEFT JOIN com a tabela comment, contando apenas os comentários cujo com_status é 'on'    
+        LEFT JOIN 
+            comment c ON a.art_id = c.com_article AND c.com_status = 'on'
+        
+        -- Filtra os artigos para incluir apenas aqueles cujo art_status é 'on' e art_date é menor ou igual a NOW()
+        WHERE 
+            a.art_status = 'on' 
+            AND a.art_date <= NOW()
+       
+        -- Agrupa os resultados por art_id, art_title    
+        GROUP BY 
+            a.art_id, a.art_title
+        
+        -- Filtra os grupos para incluir apenas aqueles com contagem de comentários maior que zero
+        HAVING 
+            comment_count > 0
+        
+        -- Ordena os resultados pela contagem de comentários em ordem decrescente
+        ORDER BY 
+            comment_count DESC
+        
+         -- Limita os resultados a # registros
+        LIMIT %s;
+    '''
+
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute(sql, (limit,))
+    most_comments = cur.fetchall()
+    cur.close()
+
+    return most_comments
+
+
+def most_view(mysql, limit=4):
+    
+    sql ='''
+        SELECT art_id, art_title, art_thumbnail
+
+        FROM article
+
+        WHERE art_status = 'on' AND art_date <= NOW()
+
+        ORDER BY art_view DESC
+
+        LIMIT %s;
+
+    '''
+
+
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute(sql, (limit,))
+    most_view = cur.fetchall()
+    cur.close()
+
+    return most_view

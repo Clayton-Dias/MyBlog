@@ -43,8 +43,34 @@
 {% block aside %} 
 
 {# Título para a seção "aside" #}
-<h3>Meu Aside</h3> 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> {# Texto de exemplo em latim #}
+<h3><i class="fa-solid fa-plus"></i> Visitados</h3> 
 
-{# Fim do bloco "aside" #}
-{% endblock %} 
+<div class="aside-grid">
+
+    {% for article in page.views %}
+
+    <div class="aside-article" onclick="location.href = '/view/{{ article.art_id }}'">
+        <img src="{{ article['art_thumbnail'] }}" alt="{{ article['art_title'] }}">
+        <div>{{ article['art_title'] }}</div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<h3><i class="fa-solid fa-plus"></i> Comentados</h3>
+
+<div class="aside-grid">
+
+    {% for article in page.commenteds %}
+
+    <div class="aside-article" onclick="location.href = '/view/{{ article.art_id }}'">
+        <img src="{{ article['art_thumbnail'] }}" alt="{{ article['art_title'] }}">
+        <div>{{ article['art_title'] }}</div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %} {# Fim do bloco "aside" #}
