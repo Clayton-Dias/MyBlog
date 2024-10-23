@@ -2,7 +2,7 @@
 
 // Dados para conexão com o Firebase 
 const firebaseConfig = {
-    apiKey: "AIzaSyCIuxdcem7bHs6W17Y4OTLSfMaIkm4AN00", // Chave da API
+    apiKey: "", // Chave da API
     authDomain: "myblog-flask.firebaseapp.com", // Domínio de autenticação
     projectId: "myblog-flask", // ID do projeto
     storageBucket: "myblog-flask.appspot.com", // Bucket de armazenamento
