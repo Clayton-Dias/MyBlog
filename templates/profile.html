@@ -51,4 +51,22 @@
     <li><a href="/policies">Sua privacidade</a></li>
 </ul>
 
+{% if page.comments != () %}
+<h4>Seus recentes comentários</h4>
+
+<div class="aside-comments">
+
+    {% for comment in page.comments %}
+
+    <div>
+        <h4><a href="/view/{{ comment.com_article }}#comments">{{ comment.art_title }}</a></h4>
+        {{ comment.com_comment }}
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
 {% endblock %}

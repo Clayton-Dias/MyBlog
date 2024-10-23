@@ -2,7 +2,7 @@
 
 // Dados para conexão com o Firebase 
 const firebaseConfig = {
-    apiKey: "", // Chave da API
+    apiKey: "AIzaSyCIuxdcem7bHs6W17Y4OTLSfMaIkm4AN00", // Chave da API
     authDomain: "myblog-flask.firebaseapp.com", // Domínio de autenticação
     projectId: "myblog-flask", // ID do projeto
     storageBucket: "myblog-flask.appspot.com", // Bucket de armazenamento
@@ -43,12 +43,27 @@ firebase.auth().onAuthStateChanged((user) => {
 // Função para login do usuário
 function login() {
     // Faz login pelo Google usando um popup
-    firebase.auth().signInWithPopup(provider);
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+        var credential = result.credential;
+        var token = credential.accessToken;
+        var user = result.user;
+        var userObj = {
+            name: user.displayName,
+            email: user.email,
+            userid: user.uid,
+            photo: user.photoURL
+        }
+        // Cria cookie com dados do usuário do Google
+        setCookie('userData', JSON.stringify(userObj), 365)
+    });
+    
 }
 
 // Função para logout do usuário
 function logout() {
     firebase.auth().signOut(); // Desconecta o usuário
+    // Apaga cookie com dados do usuário do Google
 }
 
 // Função para excluir a conta do usuário
@@ -82,3 +97,13 @@ function userToggle() {
     }
 }
 
+// Cria um cookie
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Converte dias em milissegundos
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}

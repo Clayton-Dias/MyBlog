@@ -32,3 +32,23 @@ def get_comments(mysql, artid): # Obtém todos os comentarios do artigo
     cur.close()
 
     return comments
+
+
+def user_coments(mysql, useremail, limit=4):
+    sql = '''
+        SELECT com_article, com_comment, art_title
+        FROM comment
+        INNER JOIN article ON art_id = com_article
+        WHERE com_author_email = %s 
+            AND com_status = 'on'
+        ORDER BY com_date DESC
+        LIMIT %s
+    '''
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute(sql, (useremail, limit, ))
+    comments = cur.fetchall()
+    cur.close()
+
+    return comments
+
+

@@ -1,8 +1,9 @@
 # Importação do Flask: Aqui estamos importando a classe Flask do pacote Flask, que é um microframework para construção de aplicações web em Python.
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, json, jsonify, redirect, render_template, request, url_for
 #from flask_mail import Mail, Message
 from flask_mysqldb import MySQL, MySQLdb
 
+#import google.generativeai as genai
 from dotenv import load_dotenv  # Importa a função load_dotenv da biblioteca dotenv
 import os  # Importa o módulo os, que fornece uma maneira de interagir com o sistema operacional
 
@@ -15,8 +16,11 @@ from functions.db_comments import *
 
 from functions.db_contacts import *
 
+# Importar as funções do banco de dados, tabela staff
+from functions.db_staff import *
 
-load_dotenv()
+
+#load_dotenv()
 
 # Constantes do site
 SITE = {
@@ -55,12 +59,22 @@ app = Flask(__name__)
 
 
 # Configurações de acesso ao MySQL
+'''
 app.config.update(
     MYSQL_HOST=os.getenv('MYSQL_HOST'),         # Servidor do MySQL
     MYSQL_USER=os.getenv('MYSQL_USER'),         # Usuário do MySQL
     MYSQL_PASSWORD=os.getenv('MYSQL_PASSWORD'), # Senha do MySQL
     MYSQL_DB=os.getenv('MYSQL_DB')              # Nome da base de dados
 )
+'''
+app.config.update(
+    MYSQL_HOST='localhost',       # Servidor do MySQL
+    MYSQL_USER='root',            # Usuário do MySQL
+    MYSQL_PASSWORD='',            # Senha do MySQL
+    MYSQL_DB='myblogdb'           # Nome da base de dados
+)
+
+
 
 # Variável de conexão com o MySQL
 mysql = MySQL(app)
@@ -252,11 +266,22 @@ def contacts():
 # Rota para o perfil do usuário
 @app.route('/profile')
 def profile():
+
+    # recebe o cookie do front-end
+    userJSON = request.cookies.get('userData') 
+
+    # converte o cookie para DICT
+    user = json.loads(userJSON)
+
+    # Obtém todos os comentários deste email
+    comments = user_coments(mysql, user['email'], 6)
+
     toPage = {
         'site': SITE,
         'title': 'Pefil do usuário',
         'css': 'profile.css',
-        'js': 'profile.js'
+        'js': 'profile.js',
+        'comments': comments
     }
 
     return render_template('profile.html', page=toPage) # Renderiza a página de perfil
@@ -265,13 +290,30 @@ def profile():
 # Rota para a página de sobre (quem somos) → /about
 @app.route('/about')
 def about():
+
+    staff_members = get_staff(mysql)
+
+    # Dicionário para traduzir os tipos
+    type_translation = {
+        'admin': 'Administrador',
+        'author': 'Autor',
+        'moderator': 'Moderador'
+    }
+
+    # Adicionar a descrição traduzida e a ordem de prioridade a cada membro
+    for member in staff_members:
+        member['sta_type_translated'] = type_translation.get(member['sta_type'], 'Desconhecido')
+    
+
     page = {
         "site": SITE,
         "title": "Sobre",
-        "css": "about.css"       
+        "css": "about.css",
+        'staff': staff_members       
     }
     return render_template("about.html", page=page) # Renderiza a página sobre
  
+
 # Manipulador de erro 404
 @app.errorhandler(404)
 def page_not_found(e):
@@ -337,6 +379,8 @@ def policies():
     
     # Renderiza o template 'policies.html' com os dados da página
     return render_template("policies.html", page=page)
+
+
 
 
 # Verificação de execução: Este bloco garante que o código dentro dele só será executado se o script for executado diretamente, e não se for importado como um módulo em outro script.

@@ -1,4 +1,4 @@
-/*
+
 $(document).ready(runProfile); // Executa a função runProfile quando o DOM está totalmente carregado
 
 // Monitora mudanças no estado de autenticação do usuário
@@ -58,9 +58,9 @@ function dateConvert(date) {
     // Retorna a data formatada
     return formattedDate;
 };
-*/
 
 
+/*
 $(document).ready(runProfile); // Executa a função runProfile após o DOM estar pronto
 
 // Monitora o estado de autenticação do usuário

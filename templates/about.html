@@ -10,8 +10,21 @@
     <p>Nosso site foi criado para ser um espaço inclusivo e acessível, onde todos podem encontrar algo interessante para ler, aprender e compartilhar. Nós valorizamos a interação com nossos leitores, então fique à vontade para entrar em contato conosco ou deixar um comentário em nossos artigos.</p>
         
     <p>Esperamos que você aproveite o conteúdo que preparamos para você.</p>
+    
+    <h1>Conheça nossa equipe</h1>
+    <div class="staff-list">
+        {% for member in page.staff %}
+            <div class="staff-member">
+                <img src="{{ member.sta_image }}" alt="{{ member.sta_name }}">
+                <h2>{{ member.sta_name }}</h2>
+                <p><strong>Data de Nascimento:</strong> {{ member.sta_birth }}</p>
+                <p><strong>Descrição:</strong> {{ member.sta_description }}</p>
+                <p><strong>Email:</strong> {{ member.sta_email }}</p>
+                <p><strong>Cargo:</strong> {{ member.sta_type_translated }}</p>
+            </div>
+        {% endfor %}
 
-    <p><strong>Obrigado por nos visitar!</strong></p>
+    <h2>Obrigado por nos visitar!</h2>
 </div>
 
 {% endblock %}  {# Fim do bloco "article" #}

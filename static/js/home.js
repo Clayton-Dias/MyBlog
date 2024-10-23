@@ -1,1 +1,1 @@
-console.log("Funciona home.js")
+/**/

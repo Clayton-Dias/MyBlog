@@ -1,331 +1,462 @@
 /* CSS do tema do site */
 
 /* Importações */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'); /* Importa a biblioteca de ícones Font Awesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
+/* Importa a biblioteca de ícones Font Awesome */
 
 /* Define o modelo de caixa e transições padrão para todos os elementos */
 * {
-    box-sizing: border-box; /* Inclui padding e border nas dimensões totais */
-    outline: none; /* Remove o contorno padrão ao focar em elementos */
-    transition: .2s; /* Suaviza transições de propriedades */
+    box-sizing: border-box;
+    /* Inclui padding e border nas dimensões totais */
+    outline: none;
+    /* Remove o contorno padrão ao focar em elementos */
+    transition: .2s;
+    /* Suaviza transições de propriedades */
 }
 
 /* Estilos para o html e body */
 html,
 body {
-    font-family: sans-serif; /* Define a fonte padrão do site */
-    font-size: 16px; /* Tamanho da fonte padrão */
-    position: relative; /* Define posição relativa para elementos filhos */
-    width: 100%; /* Largura total */
-    height: 100%; /* Altura total */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
+    font-family: sans-serif;
+    /* Define a fonte padrão do site */
+    font-size: 16px;
+    /* Tamanho da fonte padrão */
+    position: relative;
+    /* Define posição relativa para elementos filhos */
+    width: 100%;
+    /* Largura total */
+    height: 100%;
+    /* Altura total */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margin */
 }
 
 /* Estilo do body */
 body {
-    background-color: slategray; /* Cor de fundo cinza ardósia */
-    background-image: url('/static/img/bg01.png'); /* Imagem de fundo */
-    background-position: top left; /* Posição da imagem de fundo */
-    background-attachment: fixed; /* Mantém a imagem fixa durante o scroll */
+    background-color: slategray;
+    /* Cor de fundo cinza ardósia */
+    background-image: url('/static/img/bg01.png');
+    /* Imagem de fundo */
+    background-position: top left;
+    /* Posição da imagem de fundo */
+    background-attachment: fixed;
+    /* Mantém a imagem fixa durante o scroll */
 }
 
 /* Estilos para links */
 a {
-    color: steelblue; /* Cor padrão dos links */
-    text-decoration: none; /* Remove o sublinhado */
+    color: steelblue;
+    /* Cor padrão dos links */
+    text-decoration: none;
+    /* Remove o sublinhado */
 }
 
 a:hover {
-    color: orangered; /* Cor dos links ao passar o mouse */
+    color: orangered;
+    /* Cor dos links ao passar o mouse */
 }
 
 /* Wrapper principal */
 #wrap {
-    position: relative; /* Posição relativa */
-    width: 100%; /* Largura total */
-    height: 100%; /* Altura total */
-    max-width: 1024px; /* Largura máxima */
-    min-width: 280px; /* Largura mínima */
-    margin: auto; /* Centraliza o wrapper */
-    display: flex; /* Usar flexbox */
-    flex-direction: column; /* Organiza filhos em coluna */
+    position: relative;
+    /* Posição relativa */
+    width: 100%;
+    /* Largura total */
+    height: 100%;
+    /* Altura total */
+    max-width: 1024px;
+    /* Largura máxima */
+    min-width: 280px;
+    /* Largura mínima */
+    margin: auto;
+    /* Centraliza o wrapper */
+    display: flex;
+    /* Usar flexbox */
+    flex-direction: column;
+    /* Organiza filhos em coluna */
 }
 
 /* Estilos para o cabeçalho */
 #wrap>header {
-    background-color: rgb(89, 162, 221); /* Cor de fundo do cabeçalho */
-    display: flex; /* Flexbox para disposição */
-    flex-direction: column; /* Organiza em coluna */
+    background-color: rgb(89, 162, 221);
+    /* Cor de fundo do cabeçalho */
+    display: flex;
+    /* Flexbox para disposição */
+    flex-direction: column;
+    /* Organiza em coluna */
 }
 
 /* Container dentro do cabeçalho */
 #wrap>header>div {
-    display: flex; /* Flexbox para disposição */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    justify-content: flex-start; /* Alinha itens à esquerda */
-    flex-grow: 1; /* Permite crescimento do flex */
+    display: flex;
+    /* Flexbox para disposição */
+    align-items: center;
+    /* Alinha itens verticalmente ao centro */
+    justify-content: flex-start;
+    /* Alinha itens à esquerda */
+    flex-grow: 1;
+    /* Permite crescimento do flex */
 }
 
 /* Estilo para o span dentro do cabeçalho */
 #wrap>header>div>span {
-    margin-left: auto; /* Empurra o span para a direita */
+    margin-left: auto;
+    /* Empurra o span para a direita */
 }
 
 /* Estilo da imagem do usuário no cabeçalho */
 #wrap>header>div>span>img {
-    margin-right: 1rem; /* Espaçamento à direita da imagem */
-    display: block; /* Exibe como bloco */
-    cursor: pointer; /* Cursor de ponteiro ao passar sobre a imagem */
-    border-radius: 50%; /* Borda arredondada para imagem circular */
+    margin-right: 1rem;
+    /* Espaçamento à direita da imagem */
+    display: block;
+    /* Exibe como bloco */
+    cursor: pointer;
+    /* Cursor de ponteiro ao passar sobre a imagem */
+    border-radius: 50%;
+    /* Borda arredondada para imagem circular */
 }
 
 /* Estilos para imagens no cabeçalho */
 #wrap>header>div img {
-    height: 4rem; /* Altura da imagem */
-    width: auto; /* Largura automática para manter proporção */
-    display: block; /* Exibe como bloco */
-    margin: 0 .5rem; /* Margem horizontal */
+    height: 4rem;
+    /* Altura da imagem */
+    width: auto;
+    /* Largura automática para manter proporção */
+    display: block;
+    /* Exibe como bloco */
+    margin: 0 .5rem;
+    /* Margem horizontal */
 }
 
 /* Estilo do título no cabeçalho */
 #wrap>header>div h1 {
-    margin: 0; /* Remove margens */
-    color: rgb(218, 228, 134); /* Cor do texto */
-    -webkit-text-stroke: .5px black; /* Contorno do texto */
-    font-size: 2.5rem; /* Tamanho da fonte */
+    margin: 0;
+    /* Remove margens */
+    color: rgb(218, 228, 134);
+    /* Cor do texto */
+    -webkit-text-stroke: .5px black;
+    /* Contorno do texto */
+    font-size: 2.5rem;
+    /* Tamanho da fonte */
 }
 
 /* Estilo do formulário de pesquisa no cabeçalho */
 #wrap>header>form {
-    background-color: orange; /* Cor de fundo do formulário */
-    display: flex; /* Flexbox para disposição */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    padding: 1rem; /* Espaçamento interno */
-    border-top: 1px dotted white; /* Borda superior pontilhada */
+    background-color: orange;
+    /* Cor de fundo do formulário */
+    display: flex;
+    /* Flexbox para disposição */
+    align-items: center;
+    /* Alinha itens verticalmente ao centro */
+    padding: 1rem;
+    /* Espaçamento interno */
+    border-top: 1px dotted white;
+    /* Borda superior pontilhada */
 }
 
 /* Estilo para inputs e botões no formulário */
 #wrap>header>form input,
 #wrap>header>form button {
-    font-family: inherit; /* Herda a fonte do elemento pai */
-    font-size: inherit; /* Herda o tamanho da fonte do elemento pai */
-    padding: .25rem .5rem; /* Espaçamento interno */
-    border: none; /* Remove borda padrão */
+    font-family: inherit;
+    /* Herda a fonte do elemento pai */
+    font-size: inherit;
+    /* Herda o tamanho da fonte do elemento pai */
+    padding: .25rem .5rem;
+    /* Espaçamento interno */
+    border: none;
+    /* Remove borda padrão */
 }
 
 /* Estilo específico para o input no formulário */
 #wrap>header>form input {
-    flex-grow: 1; /* Permite que o input cresça para preencher o espaço disponível */
+    flex-grow: 1;
+    /* Permite que o input cresça para preencher o espaço disponível */
 }
 
 /* Estilo para o botão no formulário */
 #wrap>header>form button {
-    cursor: pointer; /* Cursor de ponteiro ao passar sobre o botão */
-    background-color: #ddd; /* Cor de fundo do botão */
+    cursor: pointer;
+    /* Cursor de ponteiro ao passar sobre o botão */
+    background-color: #ddd;
+    /* Cor de fundo do botão */
 }
 
 /* Estilo do botão ao passar o mouse */
 #wrap>header>form button:hover {
-    cursor: pointer; /* Mantém cursor de ponteiro */
-    background-color: #bbb; /* Muda a cor do fundo ao passar o mouse */
+    cursor: pointer;
+    /* Mantém cursor de ponteiro */
+    background-color: #bbb;
+    /* Muda a cor do fundo ao passar o mouse */
 }
 
 /* Menu principal */
 #wrap>nav {
-    background-color: rgb(50, 59, 68); /* Cor de fundo do menu */
-    border-top: 1px dotted white; /* Borda superior pontilhada */
-    border-bottom: 1px dotted white; /* Borda inferior pontilhada */
-    display: flex; /* Flexbox para disposição */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    justify-content: space-around; /* Espaço igual entre os itens */
+    background-color: rgb(50, 59, 68);
+    /* Cor de fundo do menu */
+    border-top: 1px dotted white;
+    /* Borda superior pontilhada */
+    border-bottom: 1px dotted white;
+    /* Borda inferior pontilhada */
+    display: flex;
+    /* Flexbox para disposição */
+    align-items: center;
+    /* Alinha itens verticalmente ao centro */
+    justify-content: space-around;
+    /* Espaço igual entre os itens */
 }
 
 /* Estilo dos links no menu */
 #wrap>nav a {
-    color: #ddd; /* Cor do texto dos links */
-    text-decoration: none; /* Remove o sublinhado */
-    padding: 1rem; /* Espaçamento interno dos links */
-    text-transform: uppercase; /* Transforma texto para maiúsculas */
+    color: #ddd;
+    /* Cor do texto dos links */
+    text-decoration: none;
+    /* Remove o sublinhado */
+    padding: 1rem;
+    /* Espaçamento interno dos links */
+    text-transform: uppercase;
+    /* Transforma texto para maiúsculas */
 }
 
 /* Estilo do link ao passar o mouse no menu */
 #wrap>nav a:hover {
-    color: rgb(50, 59, 68); /* Muda a cor do texto */
-    background-color: #ddd; /* Muda a cor do fundo */
+    color: rgb(50, 59, 68);
+    /* Muda a cor do texto */
+    background-color: #ddd;
+    /* Muda a cor do fundo */
 }
 
 /** Conteúdo principal **/
 #wrap>main {
-    display: flex; /* Usar flexbox */
-    flex-direction: column; /* Organiza em coluna */
-    flex-grow: 1; /* Permite que o main cresça para preencher o espaço */
+    display: flex;
+    /* Usar flexbox */
+    flex-direction: column;
+    /* Organiza em coluna */
+    flex-grow: 1;
+    /* Permite que o main cresça para preencher o espaço */
 }
 
 /** Estilo do artigo principal **/
 #wrap>main>article {
-    background-color: white; /* Cor de fundo do artigo */
-    padding: 0 1rem; /* Espaçamento lateral */
-    flex-grow: 1; /* Permite que o artigo cresça para preencher o espaço */
+    background-color: white;
+    /* Cor de fundo do artigo */
+    padding: 0 1rem;
+    /* Espaçamento lateral */
+    flex-grow: 1;
+    /* Permite que o artigo cresça para preencher o espaço */
 }
 
 /** Estilo do conteúdo auxiliar **/
 #wrap>main>aside {
-    background-color: #ccc; /* Cor de fundo do aside */
-    padding: 0 1rem; /* Espaçamento lateral */
-    border-top: 1px dotted black; /* Borda superior pontilhada */
+    background-color: #ccc;
+    /* Cor de fundo do aside */
+    padding: 0 1rem;
+    /* Espaçamento lateral */
+    border-top: 1px dotted black;
+    /* Borda superior pontilhada */
 }
 
 /* Rodapé */
 #wrap>footer {
-    background-color: rgb(50, 59, 68); /* Cor de fundo do rodapé */
-    color: #ddd; /* Cor do texto do rodapé */
-    display: flex; /* Flexbox para disposição */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    justify-content: space-between; /* Espaço entre os itens */
+    background-color: rgb(50, 59, 68);
+    /* Cor de fundo do rodapé */
+    color: #ddd;
+    /* Cor do texto do rodapé */
+    display: flex;
+    /* Flexbox para disposição */
+    align-items: center;
+    /* Alinha itens verticalmente ao centro */
+    justify-content: space-between;
+    /* Espaço entre os itens */
 }
 
 /* Estilo dos links no rodapé */
 #wrap>footer>a {
-    font-size: 1.5rem; /* Tamanho da fonte dos links */
-    padding: .5rem; /* Espaçamento interno dos links */
-    color: #ddd; /* Cor do texto dos links */
+    font-size: 1.5rem;
+    /* Tamanho da fonte dos links */
+    padding: .5rem;
+    /* Espaçamento interno dos links */
+    color: #ddd;
+    /* Cor do texto dos links */
 }
 
 /* Estilo do link ao passar o mouse no rodapé */
 #wrap>footer a:hover {
-    color: steelblue; /* Muda a cor do texto ao passar o mouse */
+    color: steelblue;
+    /* Muda a cor do texto ao passar o mouse */
 }
 
 /* Estilo do div no rodapé */
 #wrap>footer>div {
-    text-align: center; /* Alinha texto ao centro */
-    padding: 1rem 0; /* Espaçamento vertical */
+    text-align: center;
+    /* Alinha texto ao centro */
+    padding: 1rem 0;
+    /* Espaçamento vertical */
 }
 
 /* Estilo dos links dentro do div no rodapé */
 #wrap>footer>div a {
-    color: #ddd; /* Cor dos links */
-    text-decoration: none; /* Remove o sublinhado */
+    color: #ddd;
+    /* Cor dos links */
+    text-decoration: none;
+    /* Remove o sublinhado */
 }
 
 /* Estilo para textos pequenos no rodapé */
 #wrap>footer>div small {
-    display: block; /* Exibe como bloco */
-    font-size: 65%; /* Tamanho da fonte reduzido */
-    margin-top: .25rem; /* Espaço acima */
+    display: block;
+    /* Exibe como bloco */
+    font-size: 65%;
+    /* Tamanho da fonte reduzido */
+    margin-top: .25rem;
+    /* Espaço acima */
 }
 
 /* Media queries para responsividade */
 @media screen and (min-width: 575px) {
     #wrap>header {
-        flex-direction: row; /* Altera a direção do flex para linha */
-        justify-content: space-between; /* Espaço entre itens */
+        flex-direction: row;
+        /* Altera a direção do flex para linha */
+        justify-content: space-between;
+        /* Espaço entre itens */
     }
 
     #wrap>header>div h1 {
-        font-size: 2rem; /* Tamanho do título reduzido */
+        font-size: 2rem;
+        /* Tamanho do título reduzido */
     }
 
     #wrap>header>form {
-        border-top: none; /* Remove a borda superior */
-        border-left: 1px dotted white; /* Adiciona borda esquerda */
+        border-top: none;
+        /* Remove a borda superior */
+        border-left: 1px dotted white;
+        /* Adiciona borda esquerda */
     }
 
     #wrap>header>form input,
     #wrap>header>form button {
-        padding: .35rem .5rem; /* Ajusta o padding */
+        padding: .35rem .5rem;
+        /* Ajusta o padding */
     }
 
     #wrap>nav {
-        justify-content: flex-end; /* Alinha os itens do menu à direita */
+        justify-content: flex-end;
+        /* Alinha os itens do menu à direita */
     }
 
     #wrap>nav a:first-child {
-        margin-right: auto; /* Empurra o primeiro link para a esquerda */
+        margin-right: auto;
+        /* Empurra o primeiro link para a esquerda */
     }
 }
 
 /* Media queries para telas maiores */
 @media screen and (min-width: 768px) {
     #wrap>main {
-        flex-direction: row; /* Altera a direção do flex para linha */
+        flex-direction: row;
+        /* Altera a direção do flex para linha */
     }
 
     #wrap>main>aside {
-        background-color: #ccc; /* Cor de fundo do aside */
-        padding: 0 1rem; /* Espaçamento lateral */
-        min-width: 250px; /* Largura mínima */
-        max-width: 250px; /* Largura máxima */
-        border-top: none; /* Remove a borda superior */
-        border-left: 1px dotted black; /* Borda esquerda */
+        background-color: #ccc;
+        /* Cor de fundo do aside */
+        padding: 0 1rem;
+        /* Espaçamento lateral */
+        min-width: 250px;
+        /* Largura mínima */
+        max-width: 250px;
+        /* Largura máxima */
+        border-top: none;
+        /* Remove a borda superior */
+        border-left: 1px dotted black;
+        /* Borda esquerda */
     }
 }
 
 /* Estilo para grid de artigos no aside */
 .aside-grid {
-    display: grid; /* Usar grid layout */
-    gap: 1rem; /* Espaçamento entre itens */
-    margin-bottom: 1rem; /* Espaço abaixo */
+    display: grid;
+    /* Usar grid layout */
+    gap: 1rem;
+    /* Espaçamento entre itens */
+    margin-bottom: 1rem;
+    /* Espaço abaixo */
 }
 
 /* Estilo para cada artigo no aside */
 .aside-article {
-    display: flex; /* Flexbox para disposição */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    cursor: pointer; /* Cursor de ponteiro ao passar sobre o artigo */
-    font-size: 90%; /* Tamanho da fonte reduzido */
+    display: flex;
+    /* Flexbox para disposição */
+    align-items: center;
+    /* Alinha itens verticalmente ao centro */
+    cursor: pointer;
+    /* Cursor de ponteiro ao passar sobre o artigo */
+    font-size: 90%;
+    /* Tamanho da fonte reduzido */
 }
 
 /* Estilo da imagem no artigo do aside */
 .aside-article img {
-    display: block; /* Exibe como bloco */
-    width: 4rem; /* Largura fixa da imagem */
-    height: auto; /* Altura automática para manter proporção */
-    margin-right: .5rem; /* Espaçamento à direita */
+    display: block;
+    /* Exibe como bloco */
+    width: 4rem;
+    /* Largura fixa da imagem */
+    height: auto;
+    /* Altura automática para manter proporção */
+    margin-right: .5rem;
+    /* Espaçamento à direita */
 }
 
 /* Estilo do artigo ao passar o mouse */
 .aside-article:hover {
-    background-color: #eee; /* Muda a cor de fundo ao passar o mouse */
+    background-color: #eee;
+    /* Muda a cor de fundo ao passar o mouse */
 }
 
 /* Media queries para telas pequenas */
 @media (max-width: 499px) {
     .aside-grid {
-        grid-template-columns: 1fr; /* Uma coluna */
+        grid-template-columns: 1fr;
+        /* Uma coluna */
     }
 }
 
 /* Media queries para telas médias */
 @media (min-width: 500px) and (max-width: 767px) {
     .aside-grid {
-        grid-template-columns: 1fr 1fr; /* Duas colunas */
+        grid-template-columns: 1fr 1fr;
+        /* Duas colunas */
     }
 
     .aside-article:nth-child(odd) {
-        justify-self: center; /* Centraliza artigos em posições ímpares */
+        justify-self: center;
+        /* Centraliza artigos em posições ímpares */
     }
 }
 
 /* Media queries para telas grandes */
 @media (min-width: 768px) {
     .aside-grid {
-        grid-template-columns: 1fr; /* Uma coluna */
+        grid-template-columns: 1fr;
+        /* Uma coluna */
     }
 }
 
 /* Estilo de centralização de texto */
 .center {
-    text-align: center; /* Centraliza o texto */
+    text-align: center;
+    /* Centraliza o texto */
 }
 
 /* Estilo de texto vermelho */
 .red {
-    color: red; /* Cor do texto vermelha */
+    color: red;
+    /* Cor do texto vermelha */
 }
 
 /* Estilo de texto pequeno */
 .small {
-    font-size: small; /* Tamanho da fonte pequeno */
+    font-size: small;
+    /* Tamanho da fonte pequeno */
 }

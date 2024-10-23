@@ -5,6 +5,35 @@
     text-align: justify;
 }
 
+.staff-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Para centralizar os itens */
+}
+
+.staff-member {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px; /* Aumentar o padding para mais espaço */
+    margin: 10px;
+    width: 220px; /* Aumentar um pouco a largura */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adicionar sombra para destaque */
+    overflow: hidden; /* Para evitar que o conteúdo vaze */
+}
+
+.staff-member img {
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.staff-member p {
+    margin: 5px 0; /* Ajustar a margem dos parágrafos */
+    word-wrap: break-word; /* Quebrar palavras longas */
+}
+
+
+
 /* Estilo responsivo para mobile */
 @media (max-width: 768px) {
     .about-content {
