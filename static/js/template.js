@@ -2,14 +2,13 @@
 
 // Dados para conexão com o Firebase 
 const firebaseConfig = {
-    apiKey: "AIzaSyCIuxdcem7bHs6W17Y4OTLSfMaIkm4AN00", // Chave da API
+    apiKey: "", // Chave da API
     authDomain: "myblog-flask.firebaseapp.com", // Domínio de autenticação
     projectId: "myblog-flask", // ID do projeto
     storageBucket: "myblog-flask.appspot.com", // Bucket de armazenamento
     messagingSenderId: "534410500699", // ID do remetente de mensagens
     appId: "1:534410500699:web:1352e94e2126ba8cee7d7e" // ID do aplicativo
 };
-
 
 // Conexão com o Firebase, usando os dados de configuração
 const app = firebase.initializeApp(firebaseConfig);
@@ -21,8 +20,8 @@ var provider = new firebase.auth.GoogleAuthProvider();
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         // Se o usuário estiver logado, atualiza o botão para a ação 'profile'
-        $('#loginUserr').attr({'data-action': 'profile'});
-        
+        $('#loginUserr').attr({ 'data-action': 'profile' });
+
         // Atualiza a imagem do usuário logado
         $('#loginUser img').attr({
             'src': user.photoURL, // URL da foto do perfil do usuário
@@ -30,8 +29,8 @@ firebase.auth().onAuthStateChanged((user) => {
         });
     } else {
         // Se não houver usuário logado, atualiza o botão para a ação 'login'
-        $('#loginUserr').attr({'data-action': 'login'});
-        
+        $('#loginUserr').attr({ 'data-action': 'login' });
+
         // Define a imagem padrão para usuários não logados
         $('#loginUser img').attr({
             'src': '/static/img/user.png', // Imagem padrão quando não está logado
@@ -39,6 +38,7 @@ firebase.auth().onAuthStateChanged((user) => {
         });
     }
 });
+
 
 // Função para login do usuário
 function login() {
@@ -76,7 +76,7 @@ function userToggle() {
         // Caso contrário, redireciona para o perfil do usuário
         // Temporário: faz logout
         // logout(); // (comentado por enquanto)
-        
+
         // Redireciona para a página de perfil
         location.href = '/profile';
     }

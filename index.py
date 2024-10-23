@@ -3,6 +3,10 @@ from flask import Flask, redirect, render_template, request, url_for
 #from flask_mail import Mail, Message
 from flask_mysqldb import MySQL, MySQLdb
 
+from dotenv import load_dotenv  # Importa a função load_dotenv da biblioteca dotenv
+import os  # Importa o módulo os, que fornece uma maneira de interagir com o sistema operacional
+
+
 # Importar as funções do banco de dados, tabela article
 from functions.db_articles import *
 
@@ -10,6 +14,9 @@ from functions.db_articles import *
 from functions.db_comments import *
 
 from functions.db_contacts import *
+
+
+load_dotenv()
 
 # Constantes do site
 SITE = {
@@ -44,12 +51,15 @@ SOCIAL = (
 # Inicialização da aplicação: Criamos uma instância da classe Flask. O argumento __name__ ajuda o Flask a determinar o caminho da aplicação e a localizar recursos como templates e arquivos estáticos.
 app = Flask(__name__)
 
+
+
+
 # Configurações de acesso ao MySQL
 app.config.update(
-    MYSQL_HOST='localhost',       # Servidor do MySQL
-    MYSQL_USER='root',            # Usuário do MySQL
-    MYSQL_PASSWORD='',      # Senha do MySQL
-    MYSQL_DB='myblogdb'           # Nome da base de dados
+    MYSQL_HOST=os.getenv('MYSQL_HOST'),         # Servidor do MySQL
+    MYSQL_USER=os.getenv('MYSQL_USER'),         # Usuário do MySQL
+    MYSQL_PASSWORD=os.getenv('MYSQL_PASSWORD'), # Senha do MySQL
+    MYSQL_DB=os.getenv('MYSQL_DB')              # Nome da base de dados
 )
 
 # Variável de conexão com o MySQL
@@ -285,39 +295,49 @@ def page_not_found(e):
     return 'Errou'
 
 
-@app.route('/search')
+# Define a rota para a busca de artigos
+@app.route('/search')  
 def search():
-
+    # Obtém o parâmetro de consulta 'q' da URL
     query = request.args.get('q')
 
-    articles = article_search(mysql,query)
+    # Chama a função article_search para buscar os artigos que correspondem à consulta
+    articles = article_search(mysql, query)
 
+    # Calcula o total de artigos encontrados
     total = len(articles)
 
+    # Obtém os 5 artigos mais recentes
     recents = get_all(mysql, 5)
     
+    # Cria um dicionário com os dados da página
     page = {
-        'title': 'Pesquisa',
-        'site': SITE,
-        'css': 'home.css',
-        'articles': articles,
-        'total': total,
-        'query': query,
-        'recents': recents
+        'title': 'Pesquisa',  # Título da página
+        'site': SITE,        # Nome do site
+        'css': 'home.css',   # Arquivo CSS para estilização
+        'articles': articles, # Lista de artigos encontrados
+        'total': total,      # Total de artigos encontrados
+        'query': query,      # Consulta realizada
+        'recents': recents   # Artigos mais recentes
     }
 
+    # Renderiza o template 'search.html' com os dados da página
     return render_template('search.html', page=page)
 
 
-@app.route("/policies")
+# Define a rota para a política de privacidade
+@app.route("/policies")  
 def policies():
+    # Cria um dicionário com os dados da página
     page = {
-        "site": SITE,
-        "title": "Política de Privacidade",
-        "css": "policies.css",
+        "site": SITE,                # Nome do site
+        "title": "Política de Privacidade",  # Título da página
+        "css": "policies.css",       # Arquivo CSS para estilização
     }
-    # Renderiza o template policies.html
+    
+    # Renderiza o template 'policies.html' com os dados da página
     return render_template("policies.html", page=page)
+
 
 # Verificação de execução: Este bloco garante que o código dentro dele só será executado se o script for executado diretamente, e não se for importado como um módulo em outro script.
 if __name__ == '__main__':
