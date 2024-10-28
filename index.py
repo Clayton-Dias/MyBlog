@@ -70,7 +70,7 @@ app.config.update(
 app.config.update(
     MYSQL_HOST='localhost',       # Servidor do MySQL
     MYSQL_USER='root',            # Usuário do MySQL
-    MYSQL_PASSWORD='123456',            # Senha do MySQL
+    MYSQL_PASSWORD='',            # Senha do MySQL
     MYSQL_DB='myblogdb'           # Nome da base de dados
 )
 

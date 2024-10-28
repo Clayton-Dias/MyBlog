@@ -8,6 +8,5 @@
 
 5 - deactivate
 
-Extra(instalar)- pip install pyautogui
+Extra(instalar)- pip install 
 
-Extra 2 (atualizar) - pip install --upgrade pyautogui

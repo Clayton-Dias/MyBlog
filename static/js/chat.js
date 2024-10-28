@@ -22,7 +22,9 @@ $(document).ready(function () {
                 success: function (response) {
                     $('#chat-messages').append(`<div><strong>Gemini:</strong> ${response.reply}</div>`);
                 }
+
             });
         }
+        return false;
     });
 });
