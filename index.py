@@ -3,7 +3,7 @@ from flask import Flask, json, jsonify, redirect, render_template, request, url_
 #from flask_mail import Mail, Message
 from flask_mysqldb import MySQL, MySQLdb
 
-#import google.generativeai as genai
+import google.generativeai as genai
 from dotenv import load_dotenv  # Importa a função load_dotenv da biblioteca dotenv
 import os  # Importa o módulo os, que fornece uma maneira de interagir com o sistema operacional
 
@@ -70,7 +70,7 @@ app.config.update(
 app.config.update(
     MYSQL_HOST='localhost',       # Servidor do MySQL
     MYSQL_USER='root',            # Usuário do MySQL
-    MYSQL_PASSWORD='',            # Senha do MySQL
+    MYSQL_PASSWORD='123456',            # Senha do MySQL
     MYSQL_DB='myblogdb'           # Nome da base de dados
 )
 
@@ -90,6 +90,13 @@ app.config['MAIL_PASSWORD'] = 'Senha123456'
 # Objeto de envio de e-mails
 mail = Mail(app)
 '''
+
+# Configure a API Gemini
+genai.configure(api_key='AIzaSyDrbBo43I4NNiach_cOykLZxYoIcXzPqaA')
+modelo = genai.GenerativeModel("models/gemini-1.5-pro-latest")
+chat = modelo.start_chat(history=[])
+
+
 
 # @ -> anotation
 # Definição de rota: O decorador @app.route('/') define uma rota para a URL raiz (/). A função home() será chamada quando alguém acessar essa URL.
@@ -381,6 +388,11 @@ def policies():
     return render_template("policies.html", page=page)
 
 
+@app.route('/chat', methods=['POST'])
+def chat_message():
+    user_message = request.json.get('message')
+    response = chat.send_message(user_message)
+    return jsonify({"reply": response.text})
 
 
 # Verificação de execução: Este bloco garante que o código dentro dele só será executado se o script for executado diretamente, e não se for importado como um módulo em outro script.

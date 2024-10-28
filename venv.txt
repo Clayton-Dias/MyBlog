@@ -1,0 +1,13 @@
+1 - python -m venv .venv
+
+2 - .venv\Scripts\activate
+
+3 - pip freeze > requirements.txt
+
+4 - pip install -r requirements.txt
+
+5 - deactivate
+
+Extra(instalar)- pip install pyautogui
+
+Extra 2 (atualizar) - pip install --upgrade pyautogui

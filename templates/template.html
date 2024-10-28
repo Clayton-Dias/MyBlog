@@ -2,27 +2,31 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">  <!-- Define a codificação de caracteres como UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Configuração para responsividade -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuração para responsividade -->
 
     {# Comentário em python (Flask) no html #}
-    <link rel="stylesheet" href="/static/css/template.css">  <!-- Estilo principal do template -->
-    
+    <link rel="stylesheet" href="/static/css/template.css"> <!-- Estilo principal do template -->
+
+    <link rel="stylesheet" href="/static/css/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     {# Carrega o CSS adicional, caso exista #}
     {% if page.css %}
-    <link rel="stylesheet" href="/static/css/{{page.css}}">  <!-- CSS específico da página, caso fornecido -->
+    <link rel="stylesheet" href="/static/css/{{page.css}}"> <!-- CSS específico da página, caso fornecido -->
     {% endif %}
 
     {# Ícone do Site #}
-    <link rel="shortcut icon" href="{{page.site.LOGO}}">  <!-- Ícone exibido na aba do navegador -->
+    <link rel="shortcut icon" href="{{page.site.LOGO}}"> <!-- Ícone exibido na aba do navegador -->
 
     {# A linha abaixo atualiza o título da página #}
     {% if page.title == "" %}
-    <title>{{page.site.NAME}}</title>  <!-- Título padrão do site -->
+    <title>{{page.site.NAME}}</title> <!-- Título padrão do site -->
     {% else %}
-    <title>{{page.site.NAME}} - {{page.title|safe}}</title>  <!-- Título da página com o nome do site -->
+    <title>{{page.site.NAME}} - {{page.title|safe}}</title> <!-- Título da página com o nome do site -->
     {% endif %}
 </head>
+
 
 <body>
 
@@ -30,58 +34,83 @@
 
         <header>
             <div>
-                <a href="/"><img src="{{page.site.LOGO}}" alt="Logotipo do site {{page.site.NAME}}"></a>  <!-- Link para a página inicial com logotipo -->
-                <h1>{{page.site.NAME}}</h1>  <!-- Nome do site -->
-                <span id="loginUser" data-action="login">  <!-- Ícone de login do usuário -->
+                <a href="/"><img src="{{page.site.LOGO}}" alt="Logotipo do site {{page.site.NAME}}"></a>
+                <!-- Link para a página inicial com logotipo -->
+                <h1>{{page.site.NAME}}</h1> <!-- Nome do site -->
+                <span id="loginUser" data-action="login"> <!-- Ícone de login do usuário -->
                     <img src="/static/img/user.png" alt="Login do usuário" referrerpolicy="no-referrer">
-                    <!--<i class="fa-regular fa-circle-user fa-fw"></i>-->  <!-- Ícone comentado para possível uso futuro -->
+                    <!--<i class="fa-regular fa-circle-user fa-fw"></i>-->
+                    <!-- Ícone comentado para possível uso futuro -->
                 </span>
             </div>
-            
-            <form action="/search" method="get">  <!-- Formulário de busca -->
-                <input type="search" name="q" placeholder="Procurar..." value="{{page.query}}">  <!-- Campo de busca -->
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>  <!-- Botão de envio da busca -->
+
+            <form action="/search" method="get"> <!-- Formulário de busca -->
+                <input type="search" name="q" placeholder="Procurar..." value="{{page.query}}"> <!-- Campo de busca -->
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <!-- Botão de envio da busca -->
             </form>
         </header>
-    
+
         <nav>
-            <a href="/">Início</a>  <!-- Link para a página inicial -->
-            <a href="/contacts">Contatos</a>  <!-- Link para a página de contatos -->
-            <a href="/about">About</a>  <!-- Link para a página "Sobre" -->
+            <a href="/">Início</a> <!-- Link para a página inicial -->
+            <a href="/contacts">Contatos</a> <!-- Link para a página de contatos -->
+            <a href="/about">About</a> <!-- Link para a página "Sobre" -->
         </nav>
-    
-        <main>           
+
+
+        <main>
             <article>
-                {% block article %}{% endblock %}  <!-- Bloco para o conteúdo do artigo -->
+                {% block article %}{% endblock %} <!-- Bloco para o conteúdo do artigo -->
             </article>
-    
+
             <aside>
-                {% block aside %}{% endblock %}  <!-- Bloco para o conteúdo lateral (aside) -->
+                {% block aside %}{% endblock %} <!-- Bloco para o conteúdo lateral (aside) -->
             </aside>
         </main>
-    
+
+
         <footer>
-            <a href="/"><i class="fa-solid fa-house fa-fw"></i></a>  <!-- Link para voltar à página inicial -->
+            <a href="/"><i class="fa-solid fa-house fa-fw"></i></a> <!-- Link para voltar à página inicial -->
             <div>
-                © 2024 {{ page.site.OWNER }}  <!-- Informação de copyright com o nome do proprietário -->
+                © 2024 {{ page.site.OWNER }} <!-- Informação de copyright com o nome do proprietário -->
                 <small>
-                    <a href="/contacts">Faça contato</a>&nbsp;|&nbsp;<a href="/policies">Políticas de Privacidade</a>  <!-- Links para contato e políticas de privacidade -->
+                    <a href="/contacts">Faça contato</a>&nbsp;|&nbsp;<a href="/policies">Políticas de Privacidade</a>
+                    <!-- Links para contato e políticas de privacidade -->
                 </small>
             </div>
-            <a href="#wrap"><i class="fa-solid fa-circle-up fa-fw"></i></a>  <!-- Botão para voltar ao topo da página -->            
+            <a href="#wrap"><i class="fa-solid fa-circle-up fa-fw"></i></a> <!-- Botão para voltar ao topo da página -->
         </footer>
     </div>
 
+    <!-- Ícone do chat no canto da página -->
+    <div id="chat-icon">
+        <img src="/static/img/question-icon.png" alt="Chat Icon">
+    </div>
+    <!-- Caixa do chat -->
+    <div id="chat-box">
+        <div id="chat-header">
+            <span>Chat com Gemini</span>
+            <button id="close-chat">X</button>
+        </div>
+        <div id="chat-content">
+            <div id="chat-messages"></div>
+            <input type="text" id="chat-input" placeholder="Digite sua pergunta...">
+            <button id="send-message">Enviar</button>
+        </div>
+    </div>
+
     <!-- Javascript -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>  <!-- Biblioteca Firebase para app -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>  <!-- Biblioteca Firebase para autenticação -->
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  <!-- Biblioteca jQuery -->
-    <script src="/static/js/template.js"></script>  <!-- Script principal do template -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <!-- Biblioteca Firebase para app -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <!-- Biblioteca Firebase para autenticação -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!-- Biblioteca jQuery -->
+    <script src="/static/js/template.js"></script> <!-- Script principal do template -->
+    <script src="/static/js/chat.js"></script>
     {% if page.js %}
-    <script src="/static/js/{{page.js}}"></script>  <!-- Script específico da página, se fornecido -->
+    <script src="/static/js/{{page.js}}"></script> <!-- Script específico da página, se fornecido -->
     {% endif %}
-    
+
 </body>
 
 </html>
