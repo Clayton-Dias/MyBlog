@@ -3,7 +3,7 @@ from flask import Flask, json, jsonify, redirect, render_template, request, url_
 #from flask_mail import Mail, Message
 from flask_mysqldb import MySQL, MySQLdb
 
-import google.generativeai as genai
+import google.generativeai as genai #AIzaSyDrbBo43I4NNiach_cOykLZxYoIcXzPqaA
 from dotenv import load_dotenv  # Importa a função load_dotenv da biblioteca dotenv
 import os  # Importa o módulo os, que fornece uma maneira de interagir com o sistema operacional
 
@@ -92,7 +92,7 @@ mail = Mail(app)
 '''
 
 # Configure a API Gemini
-genai.configure(api_key='AIzaSyDrbBo43I4NNiach_cOykLZxYoIcXzPqaA')
+genai.configure(api_key='')
 modelo = genai.GenerativeModel("models/gemini-1.5-pro-latest")
 chat = modelo.start_chat(history=[])
 
