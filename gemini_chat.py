@@ -1,4 +1,4 @@
-# Instala as dependências necessárias (execute no terminal)
+# Instala as dependências necessárias (execute no terminal AIzaSyDrbBo43I4NNiach_cOykLZxYoIcXzPqaA)
 # pip install google-generativeai
 
 import google.generativeai as genai
@@ -11,7 +11,7 @@ import os
     #raise ValueError("A chave da API GOOGLE_GEMINI_API_KEY não está definida.")
 
 # Configuração da API
-genai.configure(api_key='AIzaSyDrbBo43I4NNiach_cOykLZxYoIcXzPqaA')
+genai.configure(api_key='')
 
 # Listar os modelos disponíveis
 for modelo in genai.list_models():
